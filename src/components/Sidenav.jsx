@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 import links from '../config/links';
 
 const Sidenav = () => {
@@ -9,15 +9,21 @@ const Sidenav = () => {
                     <div className="text-typography-primary font-bold text-2xl pl-10 py-6 border-b border-background-primary mb-8">
                         PETOPIA
                     </div>
-                    <div className="flex flex-col gap-6 pl-10 text-typography-secondary font-light">
+                    <div className="flex flex-col gap-6 pl-10 text-typography-secondary font-light text-sm">
                        {
                         links.map((link,index)=> (
-                            <Link to={link.path} key={index}>
-                                <div className="flex-row flex items-center gap-2">
-                                    <link.icon />
-                                    <span>{link.name}</span>
-                                </div>
-                          </Link>
+                            <NavLink
+                            to={link.path}
+                            key={index}
+                            className='group'
+                          >
+                            {({ isActive }) => (
+                              <div className="flex-row flex items-center gap-2">
+                                <link.icon className={`text-current group-hover:text-accent-primary transition-all duration-200 ${isActive ? 'text-accent-primary' : ''}`} />
+                                <span className={`group-hover:text-typography-primary group-hover:font-bold  transition-all duration-200 ${isActive ? 'text-typography-primary font-bold' : ''}`}>{link.name}</span>
+                              </div>
+                            )}
+                          </NavLink>
                         ))
                        }
                     </div>
