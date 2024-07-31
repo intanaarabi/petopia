@@ -19,7 +19,7 @@ const Sidenav = () => {
                           >
                             {({ isActive }) => (
                               <div className="flex-row flex items-center gap-2">
-                                <link.icon className={`text-current group-hover:text-accent-primary transition-all duration-200 ${isActive ? 'text-accent-primary' : ''}`} />
+                                <link.icon className={` group-hover:text-button-accent transition-all duration-200 ${isActive ? 'text-button-accent' : ''}`} />
                                 <span className={`group-hover:text-typography-primary group-hover:font-bold  transition-all duration-200 ${isActive ? 'text-typography-primary font-bold' : ''}`}>{link.name}</span>
                               </div>
                             )}
@@ -29,8 +29,9 @@ const Sidenav = () => {
                     </div>
             </div>
             <div className="flex-grow p-8">
+                {/* Add breadcrumb here */}
+                <div className='text-xs'>Breadcrumb</div>
                 <Outlet />
-
             </div>
         </div>
 

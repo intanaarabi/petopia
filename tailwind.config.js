@@ -19,6 +19,10 @@ export default {
           'secondary': '#FF9F6A',
           'tertiary': '#FFBAB6',
           'quaternary': '#FFD986'
+       },
+       'button': {
+        'primary': '#EEEDFF',
+        'accent': '#4318FF'
        }
       }
     },
