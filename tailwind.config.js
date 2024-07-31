@@ -22,7 +22,8 @@ export default {
        },
        'button': {
         'primary': '#EEEDFF',
-        'accent': '#4318FF'
+        'accent': '#4318FF',
+        'secondary':'#6C76AE',
        }
       }
     },
