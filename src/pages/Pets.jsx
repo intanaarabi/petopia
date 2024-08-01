@@ -16,7 +16,6 @@ const Pets = () => {
     return (
     <>
         <div className="flex flex-col gap-4">
-            <div className="header">Pets</div>
             <div className="flex flex-row gap-4">
                 <Search/>
                 <AddButton text="New Pet" onClick={openPopup}/>

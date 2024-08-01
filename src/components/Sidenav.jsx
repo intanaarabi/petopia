@@ -1,7 +1,12 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink,useLocation  } from 'react-router-dom';
 import links from '../config/links';
+import { getPageTitle } from '../utils/pageTitle';
+import { FaUser } from "react-icons/fa";
 
 const Sidenav = () => {
+
+    const location = useLocation();
+
     return (
         <>
         <div className="h-full flex flex-row">
@@ -28,10 +33,23 @@ const Sidenav = () => {
                        }
                     </div>
             </div>
-            <div className="flex-grow p-8">
-                {/* Add breadcrumb here */}
-                <div className='text-xs'>Breadcrumb</div>
+            <div className="flex-grow flex flex-col gap-6 p-8">
+            <div className='flex flex-row items-center'>
+                  <div className='flex flex-col'>
+                    <div className='text-xs'>Breadcrumb</div>
+                    <div className='header'>{getPageTitle(location.pathname)}</div>
+                  </div>
+                  <div className='flex-grow'></div>
+                  <div className='bg-white rounded-3xl items-center flex flex-row gap-4 px-4 py-2'>
+                    <p className='text-sm'>Welcome, <span className='font-bold'>Intan!</span></p>
+                    <div className='rounded-full w-[28px] h-[28px] bg-accent-primary flex justify-center items-center'>
+                        <FaUser className='text-button-primary '/>
+
+                    </div>
+                  </div>
+                </div>
                 <Outlet />
+
             </div>
         </div>
 
