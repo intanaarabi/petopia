@@ -6,9 +6,9 @@ import { Sex , Species} from '../enums';
 export const getSexIcon = (sex) => {
     switch (sex) {
         case Sex.MALE:
-            return <IoMdMale className="text-accent-primary" />;
+            return <IoMdMale className="text-typography-secondary hover:text-accent-primary" />;
         case Sex.FEMALE:
-            return <IoMdFemale className="text-accent-tertiary" />;
+            return <IoMdFemale className="text-typography-secondary  hover:text-accent-tertiary" />;
         default:
             return null;
     }

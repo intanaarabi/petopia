@@ -21,7 +21,7 @@ const Pets = () => {
                 <Search/>
                 <AddButton text="New Pet" onClick={openPopup}/>
             </div>
-            <div className="flex flex-wrap gap-10">
+            <div className="flex flex-wrap gap-12">
                 {
                     petsData.map((pet,index)=> (
                         <PetCard key={pet.id} pet={pet} index={index}/>
