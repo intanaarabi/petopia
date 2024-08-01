@@ -12,7 +12,7 @@ function App() {
             <Route path="/" element={<Sidenav/>}>
               {
                 links.map((link,index)=>(
-                  <Route key={index} path={link.path === "/" ? '' : link.path.slice(1)} element={<link.component/>}/>
+                  <Route key={index} path={link.path === "/" ? '' : link.path.slice(1)} element={link.component}/>
                 ))
               }
             </Route>

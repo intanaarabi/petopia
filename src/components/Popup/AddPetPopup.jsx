@@ -14,22 +14,48 @@ const AddPetPopup = ({isOpen, onClose}) => {
             <p className="header">Add New Pet</p>
                 <form onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-4">
-                    <div className="flex flex-row gap-4">
+                    <div className="flex flex-row gap-6">
                         <div className="flex flex-col flex-grow gap-4">
                             <div className="flex flex-col gap-1">
                                 <p className="label">Name</p>
                                 <input type="text" name="text" placeholder="e.g. Cheeto" className="w-full input"/>
                             </div>
 
-                            <div className="flex flex-col gap-1 pr-6">
-                                <p className="label">Birthday</p>
-                                <input type="date" name="date" placeholder="e.g. Cheeto" className="w-1/2 input"/>
+                            <div className="flex flex-row gap-6 ">
+
+                                <div className="flex flex-col gap-1 w-full">
+                                    <p className="label">Birthday</p>
+                                    <input type="date" name="date" placeholder="e.g. Cheeto" className="w-full input"/>
+                                </div>
+
+                                <div className="flex flex-col gap-1 w-full">
+                                    <p className="label">Sex</p>
+                                    <select
+                                        id="sex"
+                                        name="sex"
+                                        className="input w-full"
+                                        defaultValue="male"
+                                    >
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+
+
                             </div>
 
                             <div className="flex flex-row gap-6 ">
                                 <div className="flex flex-col gap-1 w-full">
                                     <p className="label">Species</p>
-                                    <input type="text" name="text" placeholder="e.g. Cat" className="w-full input"/>
+                                    <select
+                                        id="species"
+                                        name="species"
+                                        className="input w-full"
+                                        defaultValue="cat"
+                                    >
+                                        <option value="cat">Cat</option>
+                                        <option value="dog">Dog</option>
+                                    </select>
                                 </div>
 
                                 <div className="flex flex-col gap-1 w-full">

@@ -1,0 +1,42 @@
+[
+    {
+      "id": 1,
+      "owner_id":1,
+      "name": "Luna",
+      "species": "cat",
+      "sex":"female",
+      "breed": "Siberian",
+      "birthday": "2020-01-07",
+      "description": "A friendly Siberian cat."
+    },
+    {
+        "id": 2,
+        "owner_id":1,
+        "name": "Olofmeister",
+        "species": "cat",
+        "sex":"male",
+        "breed": "DSH",
+        "birthday": "2020-01-07",
+        "description": "A strong boi."
+    },
+    {
+        "id": 3,
+        "owner_id":1,
+        "name": "Sparkle",
+        "species": "cat",
+        "sex":"female",
+        "breed": "Nebulung",
+        "birthday": "2020-01-07",
+        "description": "A shy girl."
+    },
+    {
+        "id": 4,
+        "owner_id":1,
+        "name": "Neko",
+        "species": "cat",
+        "sex":"female",
+        "breed": "Ragdoll",
+        "birthday": "2018-09-09",
+        "description": "A bossy girl."
+    }
+  ]

@@ -6,8 +6,8 @@ import Pets from '../pages/Pets';
 
 
 const links = [
-  { path: '/', name: 'Dashboard', icon: TiHome, component: Dashboard },
-  { path: '/pets', name: 'Pets', icon: MdOutlinePets, component: Pets },
+  { path: '/', name: 'Dashboard', icon: TiHome, component: <Dashboard/> },
+  { path: '/pets', name: 'Pets', icon: MdOutlinePets, component: <Pets/> },
 ];
 
-export default links;
+export default links

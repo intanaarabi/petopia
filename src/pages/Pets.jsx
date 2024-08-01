@@ -3,12 +3,15 @@ import PetCard from "../components/Cards/PetCard"
 import AddPetPopup from "../components/Popup/AddPetPopup"
 import Search from "../components/Search"
 import { useState } from "react"
+import petsData from "../config/pets.json"
 
 const Pets = () => {
     const [isPopupOpen,setIsPopupOpen] = useState(false)
 
     const openPopup = () => setIsPopupOpen(true)
     const closePopup = () => setIsPopupOpen(false)
+
+
 
     return (
     <>
@@ -19,10 +22,11 @@ const Pets = () => {
                 <AddButton text="New Pet" onClick={openPopup}/>
             </div>
             <div className="flex flex-wrap gap-10">
-                <PetCard/>
-                <PetCard/>
-                <PetCard/>
-                <PetCard/>
+                {
+                    petsData.map((pet,index)=> (
+                        <PetCard key={pet.id} pet={pet} index={index}/>
+                    ) )
+                }
             </div>
         </div>
         <AddPetPopup isOpen={isPopupOpen} onClose={closePopup}></AddPetPopup>
