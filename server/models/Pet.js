@@ -23,6 +23,10 @@ const petSchema = new mongoose.Schema({
     type: Date,
     required: false
   },
+  description: {
+    type: String,
+    required: false,
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
