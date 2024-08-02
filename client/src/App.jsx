@@ -3,7 +3,7 @@ import './App.css'
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { checkAuth } from './redux/actions/authActions';
+import { checkAuth } from './redux/features/auth/authThunk';
 
 import links from './config/links';
 import Login from './pages/Login';
