@@ -21,17 +21,10 @@ export const login = createAsyncThunk(
 export const checkAuth = createAsyncThunk(
   'auth/checkAuth',
   async (_, { dispatch, rejectWithValue }) => {
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-      dispatch(logout());
-      return rejectWithValue();
-    }
-
     try {
       const response = await api.get('/auth/verify-token');
       if (response.data.valid) {
-        return token;
+        return response.data.userId;
       } else {
         throw new Error();
       }

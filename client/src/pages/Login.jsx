@@ -5,7 +5,6 @@ import { selectLoginError } from '../redux/features/auth/authSlice';
 
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Register from './Register';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
