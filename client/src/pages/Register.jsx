@@ -19,11 +19,11 @@ const Register = () => {
   
     return(
       <div className="h-full flex flex-row">
-        <div className='w-[45%] flex flex-row gap-4 items-center justify-center'>
+        <div className='z-10 w-[45%] flex flex-row gap-4 items-center justify-center'>
           <img src='./logo-white.svg' className='w-20 mt-2'></img>
           <p className='text-[72px] text-white font-bold tracking-wide'>petopia</p>
         </div>
-        <div className='bg-background-primary flex-grow min-h-screen justify-center items-center flex flex-col'>
+        <div className='z-10 bg-background-primary flex-grow min-h-screen justify-center items-center flex flex-col'>
           <div className='flex flex-col gap-2'>
             <p className='text-4xl text-accent-primary font-bold'>Create an account</p>
             <p className='text-md text-typography-secondary'>Enter your details for registration</p>

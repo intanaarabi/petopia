@@ -22,7 +22,7 @@ const Login = () => {
   
     return(
     <div className=" flex flex-row">
-        <div className='bg-background-primary flex-grow justify-center items-center flex flex-col'>
+        <div className='z-10 bg-background-primary flex-grow justify-center items-center flex flex-col'>
           <div className='flex flex-col gap-2'>
             <p className='text-4xl text-accent-primary font-bold'>Welcome back</p>
             <p className='text-md text-typography-secondary'>Enter your email and password to sign in</p>
@@ -58,7 +58,7 @@ const Login = () => {
           </div>
           
         </div>
-        <div className='w-[45%] min-h-screen flex flex-row gap-4 items-center justify-center'>
+        <div className='z-10 w-[45%] min-h-screen flex flex-row gap-4 items-center justify-center'>
           <img src='./logo-white.svg' className='w-20 mt-2'></img>
           <p className='text-[72px] text-white font-bold tracking-wide'>petopia</p>
         </div>
