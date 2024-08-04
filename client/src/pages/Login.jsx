@@ -5,6 +5,7 @@ import { selectLoginError } from '../redux/features/auth/authSlice';
 
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Register from './Register';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -21,8 +22,8 @@ const Login = () => {
     };
   
     return(
-    <div className="bg-background-primary min-h-full flex flex-row">
-        <div className='flex-grow min-h-screen justify-center items-center flex flex-col'>
+    <div className="min-h-full flex flex-row">
+        <div className='bg-background-primary flex-grow min-h-screen justify-center items-center flex flex-col'>
           <div className='flex flex-col gap-2'>
             <p className='text-4xl text-accent-primary font-bold'>Welcome back</p>
             <p className='text-md text-typography-secondary'>Enter your email and password to sign in</p>
@@ -52,13 +53,13 @@ const Login = () => {
                 <button type="submit" className='mt-4 bg-accent-primary text-white rounded-lg p-2 font-bold hover:opacity-80'>Sign In</button>
                 {loginError && <div className='input-error text-center'>{loginError}</div>}
                 <p className='text-center mt-2 text-sm'>Don&apos;t have an account?
-                  <NavLink className='text-accent-primary font-bold'> Sign up</NavLink>
+                  <NavLink className='text-accent-primary font-bold' to='/register'> Sign up</NavLink>
                 </p>
             </form>
           </div>
           
         </div>
-        <div className='bg-accent-primary w-[45%] min-h-screen flex flex-row gap-4 items-center justify-center'>
+        <div className='w-[45%] min-h-screen flex flex-row gap-4 items-center justify-center'>
           <img src='./logo-white.svg' className='w-20 mt-2'></img>
           <p className='text-[72px] text-white font-bold tracking-wide'>petopia</p>
         </div>
