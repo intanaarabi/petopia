@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../redux/features/auth/authThunk';
 import { selectLoginError } from '../redux/features/auth/authSlice';
 
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const Login = () => {
@@ -21,29 +21,48 @@ const Login = () => {
     };
   
     return(
-    <div className="bg-background-primary min-h-full">
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <label htmlFor="email">Email</label>
-                <input
-                id="email"
-                type="email"
-                {...register('email', { required: 'Email is required' })}
-                />
-                {errors.email && <span>{errors.email.message}</span>}
-            </div>
-            <div>
-                <label htmlFor="password">Password</label>
-                <input
-                id="password"
-                type="password"
-                {...register('password', { required: 'Password is required' })}
-                />
-                {errors.password && <span>{errors.password.message}</span>}
-            </div>
-            <button type="submit">Login</button>
-            {loginError && <div>{loginError}</div>}
-        </form>
+    <div className="bg-background-primary min-h-full flex flex-row">
+        <div className='flex-grow min-h-screen justify-center items-center flex flex-col'>
+          <div className='flex flex-col gap-2'>
+            <p className='text-4xl text-accent-primary font-bold'>Welcome back</p>
+            <p className='text-md text-typography-secondary'>Enter your email and password to sign in</p>
+            <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col mt-4 gap-4 text-typography-secondary'>
+                 <div className="flex flex-col gap-1">
+                    <label htmlFor="email" className="label-primary font-bold">Email</label>
+                    <input 
+                    id='email'
+                    type='email'
+                    placeholder='Your email address'
+                    {...register('email', {required: 'Email is required'})}
+                    className={`w-full input ${errors.password ? 'border-red-500' : '' }`}
+                    />
+                    {errors.email && <span className='input-error'>{errors.email.message}</span>}
+                </div>
+                <div className="flex flex-col gap-1">
+                    <label htmlFor="password" className="label-primary font-bold">Password</label>
+                    <input 
+                    id='password'
+                    type='password'
+                    placeholder='Your password'
+                    {...register('password', {required: 'Password is required'})}
+                    className={`w-full input ${errors.password ? 'border-red-500' : '' }`}
+                    />
+                    {errors.password && <span className='input-error'>{errors.password.message}</span>}
+                    </div>
+                <button type="submit" className='mt-4 bg-accent-primary text-white rounded-lg p-2 font-bold hover:opacity-80'>Sign In</button>
+                {loginError && <div className='input-error text-center'>{loginError}</div>}
+                <p className='text-center mt-2 text-sm'>Don&apos;t have an account?
+                  <NavLink className='text-accent-primary font-bold'> Sign up</NavLink>
+                </p>
+            </form>
+          </div>
+          
+        </div>
+        <div className='bg-accent-primary w-[45%] min-h-screen flex flex-row gap-4 items-center justify-center'>
+          <img src='./logo-white.svg' className='w-20 mt-2'></img>
+          <p className='text-[72px] text-white font-bold tracking-wide'>petopia</p>
+        </div>
+      
     </div>
     )
 }

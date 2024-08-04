@@ -17,6 +17,14 @@ body {
   @apply bg-white h-8 px-3 rounded-md text-xs border-[1.5px] font-medium focus:outline-none 
 }
 
-.label {
+.label-primary {
+  @apply text-[12px] font-bold text-typography-primary
+}
+
+.label-secondary {
   @apply text-[12px] font-medium text-typography-secondary
+}
+
+.input-error {
+  @apply text-red-500 font-bold text-xs
 }

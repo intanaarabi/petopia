@@ -17,19 +17,19 @@ const AddPetPopup = ({isOpen, onClose}) => {
                     <div className="flex flex-row gap-6">
                         <div className="flex flex-col flex-grow gap-4">
                             <div className="flex flex-col gap-1">
-                                <p className="label">Name</p>
+                                <p className="label-secondary">Name</p>
                                 <input type="text" name="text" placeholder="e.g. Cheeto" className="w-full input"/>
                             </div>
 
                             <div className="flex flex-row gap-6 ">
 
                                 <div className="flex flex-col gap-1 w-full">
-                                    <p className="label">Birthday</p>
+                                    <p className="label-secondary">Birthday</p>
                                     <input type="date" name="date" placeholder="e.g. Cheeto" className="w-full input"/>
                                 </div>
 
                                 <div className="flex flex-col gap-1 w-full">
-                                    <p className="label">Sex</p>
+                                    <p className="label-secondary">Sex</p>
                                     <select
                                         id="sex"
                                         name="sex"
@@ -46,7 +46,7 @@ const AddPetPopup = ({isOpen, onClose}) => {
 
                             <div className="flex flex-row gap-6 ">
                                 <div className="flex flex-col gap-1 w-full">
-                                    <p className="label">Species</p>
+                                    <p className="label-secondary">Species</p>
                                     <select
                                         id="species"
                                         name="species"
@@ -59,7 +59,7 @@ const AddPetPopup = ({isOpen, onClose}) => {
                                 </div>
 
                                 <div className="flex flex-col gap-1 w-full">
-                                    <p className="label">Breed</p>
+                                    <p className="label-secondary">Breed</p>
                                     <input type="text" name="text" placeholder="e.g. Persian" className="w-full input"/>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@ const AddPetPopup = ({isOpen, onClose}) => {
                         </button>
                     </div>
                     <div className="flex flex-col gap-1 w-full">
-                        <p className="label">Description</p>
+                        <p className="label-secondary">Description</p>
                         <textarea placeholder="" maxLength="300" className="w-full min-h-[70px] input py-2"/>
                     </div>
                     <button type="submit" className="bg-typography-primary rounded-lg px-4 py-2 font-bold text-white hover:opacity-80 transition-all duration-300 ">Create Pet</button>
