@@ -21,15 +21,23 @@ export const login = createAsyncThunk(
 export const checkAuth = createAsyncThunk(
   'auth/checkAuth',
   async (_, { dispatch, rejectWithValue }) => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      dispatch(logout());
+      return rejectWithValue();
+    }
+
     try {
-      const token = localStorage.getItem('token');
-      if (token) {
+      const response = await api.get('/auth/verify-token');
+      if (response.data.valid) {
         return token;
       } else {
-        dispatch(logout());
+        throw new Error();
       }
     } catch (error) {
-      return rejectWithValue(error.message);
+      dispatch(logout());
+      return rejectWithValue(error?.message);
     }
   }
 );
