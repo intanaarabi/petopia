@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 const AnimatedBackground = () => {
   return (
-    <div className='bg-accent-primary min-h-screen'>
+    <div className='bg-accent-primary'>
         <Outlet/>
     </div>
   );

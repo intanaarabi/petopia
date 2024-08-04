@@ -19,11 +19,12 @@ function App() {
   }, [dispatch]);
 
   return (
-      <div className='bg-background-primary min-h-screen text-typography-primary'>
+      <div className='bg-background-primary text-typography-primary'>
           <Routes>
-            <Route path="/" element={<AnimatedBackground />}>
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
+            <Route element={<AnimatedBackground />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              
             </Route>
 
             <Route element={<PrivateRoutes/>}>

@@ -22,8 +22,8 @@ const Login = () => {
     };
   
     return(
-    <div className="min-h-full flex flex-row">
-        <div className='bg-background-primary flex-grow min-h-screen justify-center items-center flex flex-col'>
+    <div className=" flex flex-row">
+        <div className='bg-background-primary flex-grow justify-center items-center flex flex-col'>
           <div className='flex flex-col gap-2'>
             <p className='text-4xl text-accent-primary font-bold'>Welcome back</p>
             <p className='text-md text-typography-secondary'>Enter your email and password to sign in</p>
