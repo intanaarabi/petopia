@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { registerUser } from '../redux/features/auth/authThunk';
 import { motion } from 'framer-motion'
 import { NavLink, useNavigate } from 'react-router-dom';
-import { setUserProfile } from '../redux/features/user/userThunk';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -15,7 +14,6 @@ const Register = () => {
         if (registerUser.fulfilled.match(result)) {
           navigate('/');
         }
-        dispatch(setUserProfile())
       });
     };
   
