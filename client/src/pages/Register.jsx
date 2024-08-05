@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/features/auth/authThunk';
-
+import { motion } from 'framer-motion'
 import { NavLink, useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -19,12 +19,24 @@ const Register = () => {
   
     return(
       <div className="h-full flex flex-row">
-        <div className='z-10 w-[45%] flex flex-row gap-4 items-center justify-center'>
+        <motion.div 
+           initial={{ x: '-100vw' }}
+           animate={{ x: 0 }}
+           transition={{ type: "spring", bounce: 0.25 }}
+            className='z-10 w-[45%] flex flex-row gap-4 items-center justify-center'>
           <img src='./logo-white.svg' className='w-20 mt-2'></img>
           <p className='text-[72px] text-white font-bold tracking-wide'>petopia</p>
-        </div>
-        <div className='z-10 bg-background-primary flex-grow min-h-screen justify-center items-center flex flex-col'>
-          <div className='flex flex-col gap-2'>
+        </motion.div>
+        <motion.div
+            initial={{ x: '-45vw' }}
+            animate={{ x: 0 }}
+            transition={{ type: "spring", bounce: 0.25 }}
+          className='z-10 bg-background-primary flex-grow min-h-screen justify-center items-center flex flex-col'>
+          <motion.div
+              initial={{ x: '100vw' }}
+              animate={{ x: 0 }}
+              transition={{ type: "spring", bounce: 0.25 }}
+              className='flex flex-col gap-2'>
             <p className='text-4xl text-accent-primary font-bold'>Create an account</p>
             <p className='text-md text-typography-secondary'>Enter your details for registration</p>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col mt-4 gap-4 text-typography-secondary'>
@@ -66,9 +78,9 @@ const Register = () => {
                   <NavLink className='text-accent-primary font-bold' to='/login'> Sign In</NavLink>
                 </p>
             </form>
-          </div>
+          </motion.div>
           
-        </div>
+        </motion.div>
 
       
     </div>

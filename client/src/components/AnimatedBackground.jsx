@@ -23,6 +23,7 @@ const AnimatedBackground = () => {
 
   const options = useMemo(
     () => ({
+      fullscreen: false,
       background: {
         color: {
           value: "#8980FF",
@@ -43,14 +44,14 @@ const AnimatedBackground = () => {
 
   if (init) {
     return (
-      <>
-      <Outlet/>
-      <Particles
-        id="tsparticles"
-        particlesLoaded={particlesLoaded}
-        options={options}
-      />
-      </>
+      <div className="overflow-hidden">
+        <Outlet/>
+        <Particles
+          id="tsparticles"
+          particlesLoaded={particlesLoaded}
+          options={options}
+        />
+      </div>
     );
   }
 

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/features/auth/authThunk';
 import { selectLoginError } from '../redux/features/auth/authSlice';
-
+import { motion } from 'framer-motion'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -22,8 +22,16 @@ const Login = () => {
   
     return(
     <div className=" flex flex-row">
-        <div className='z-10 bg-background-primary flex-grow justify-center items-center flex flex-col'>
-          <div className='flex flex-col gap-2'>
+        <motion.div
+           initial={{ x: '45vw' }}
+           animate={{ x: 0 }}
+           transition={{ type: "spring", bounce: 0.25 }}
+          className='z-10 bg-background-primary flex-grow justify-center items-center flex flex-col'>
+          <motion.div 
+            initial={{ x: '-100vw', opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ type: "spring", bounce: 0.25 }}
+            className='flex flex-col gap-2'>
             <p className='text-4xl text-accent-primary font-bold'>Welcome back</p>
             <p className='text-md text-typography-secondary'>Enter your email and password to sign in</p>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col mt-4 gap-4 text-typography-secondary'>
@@ -55,13 +63,17 @@ const Login = () => {
                   <NavLink className='text-accent-primary font-bold' to='/register'> Sign up</NavLink>
                 </p>
             </form>
-          </div>
+          </motion.div>
           
-        </div>
-        <div className='z-10 w-[45%] min-h-screen flex flex-row gap-4 items-center justify-center'>
+        </motion.div>
+        <motion.div 
+                   initial={{ x: '100vw' }}
+                   animate={{ x: 0 }}
+                   transition={{ type: "spring", bounce: 0.25 }}
+        className='z-10 w-[45%] min-h-screen flex flex-row gap-4 items-center justify-center'>
           <img src='./logo-white.svg' className='w-20 mt-2'></img>
           <p className='text-[72px] text-white font-bold tracking-wide'>petopia</p>
-        </div>
+        </motion.div>
       
     </div>
     )
