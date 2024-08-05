@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../redux/store';
-import { logout } from '../redux/features/auth/authSlice';
+import { logout } from '../redux/features/auth/authThunk';
 
 const apiWithoutInterceptor = axios.create({
   baseURL: import.meta.env.VITE_REACT_APP_API_BASE_URL,

@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { logout } from './authSlice';
 import api , { apiWithoutInterceptor } from '../../../utils/api';
-
+import { clearUserProfile } from '../user/userSlice';
 
 // Thunk for logging in
 export const login = createAsyncThunk(
@@ -17,6 +16,22 @@ export const login = createAsyncThunk(
     }
   }
 );
+
+//Thunk for register
+export const registerUser = createAsyncThunk(
+  'auth/register',
+    async (credentials, { rejectWithValue }) => {
+      try {
+        const response = await apiWithoutInterceptor.post('/auth/register', credentials);
+        console.log(response)
+        const token = response.data.token;
+        localStorage.setItem('token', token);
+        return token;
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    }
+)
 
 // Thunk for checking authentication status
 export const checkAuth = createAsyncThunk(
@@ -35,3 +50,11 @@ export const checkAuth = createAsyncThunk(
     }
   }
 );
+
+export const logout = createAsyncThunk('auth/logout', async (_, { dispatch }) => {
+  await Promise.all([
+    dispatch(clearUserProfile())
+  ]);
+  localStorage.removeItem('token');
+  return
+});

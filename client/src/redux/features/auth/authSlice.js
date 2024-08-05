@@ -1,57 +1,53 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { checkAuth, login } from './authThunk';
+import { checkAuth, login, logout, registerUser } from './authThunk';
+
+const handlePending = (state) => {
+  state.isAuthorized = false
+  state.isLoading = true;
+  state.error = null;
+};
+
+const handleFulfilled = (state) => {
+  state.isAuthorized = true
+  state.isLoading = false;
+  state.error = null;
+};
+
+const handleRejected = (state, action) => {
+  state.isAuthorized = false
+  state.isLoading = false;
+  state.error = action.payload;
+};
+
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    token: null,
+    isAuthorized: false,
     isLoading: true,
     error: null,
   },
-  reducers: {
-    logout: (state) => {
-      localStorage.removeItem('token');
-      state.token = null;
-      state.isLoading = false;
-      state.error = null;
-    },
-  },
   extraReducers: (builder) => {
     builder
-      .addCase(login.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(login.fulfilled, (state, action) => {
-        state.token = action.payload;
+      .addCase(login.pending, handlePending)
+      .addCase(login.fulfilled, handleFulfilled)
+      .addCase(login.rejected, handleRejected)
+      .addCase(checkAuth.pending, handlePending)
+      .addCase(checkAuth.fulfilled, handleFulfilled)
+      .addCase(checkAuth.rejected, handleRejected)
+      .addCase(registerUser.pending, handlePending)
+      .addCase(registerUser.fulfilled, handleFulfilled)
+      .addCase(registerUser.rejected, handleRejected)
+      .addCase(logout.fulfilled, (state) => {
+        state.isAuthorized = false;
         state.isLoading = false;
         state.error = null;
-      })
-      .addCase(login.rejected, (state, action) => {
-        state.token = null;
-        state.isLoading = false;
-        state.error = action.payload;
-      })
-      .addCase(checkAuth.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(checkAuth.fulfilled, (state, action) => {
-        state.token = action.payload;
-        state.isLoading = false;
-        state.error = null;
-      })
-      .addCase(checkAuth.rejected, (state, action) => {
-        state.token = null;
-        state.isLoading = false;
-        state.error = action.payload;
       });
   },
 });
 
-export const { logout } = authSlice.actions;
 export default authSlice.reducer;
 
-export const selectCurrentToken = (state) => state.auth.token;
+export const selectIsAuthorized = (state) => state.auth.isAuthorized;
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectLoginError = (state) => state.auth.error;

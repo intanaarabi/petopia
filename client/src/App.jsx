@@ -11,12 +11,15 @@ import PrivateRoutes from './components/PrivateRoute';
 import AnimatedBackground from './components/AnimatedBackground';
 import Register from './pages/Register';
 import { AnimatePresence } from 'framer-motion';
+import { setUserProfile } from './redux/features/user/userThunk';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(checkAuth());
+    dispatch(checkAuth()).then(()=>{
+      dispatch(setUserProfile())
+    })
   }, [dispatch]);
 
   return (

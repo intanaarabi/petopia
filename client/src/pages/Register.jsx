@@ -1,8 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { login } from '../redux/features/auth/authThunk';
+import { registerUser } from '../redux/features/auth/authThunk';
 import { motion } from 'framer-motion'
 import { NavLink, useNavigate } from 'react-router-dom';
+import { setUserProfile } from '../redux/features/user/userThunk';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -10,10 +11,11 @@ const Register = () => {
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
-      dispatch(login(data)).then((result) => {
-        if (login.fulfilled.match(result)) {
+      dispatch(registerUser(data)).then((result) => {
+        if (registerUser.fulfilled.match(result)) {
           navigate('/');
         }
+        dispatch(setUserProfile())
       });
     };
   

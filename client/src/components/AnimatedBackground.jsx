@@ -17,10 +17,6 @@ const AnimatedBackground = () => {
     });
   }, []);
 
-  const particlesLoaded = (container) => {
-    console.log(container);
-  };
-
   const options = useMemo(
     () => ({
       fullscreen: false,
@@ -48,7 +44,6 @@ const AnimatedBackground = () => {
         <Outlet/>
         <Particles
           id="tsparticles"
-          particlesLoaded={particlesLoaded}
           options={options}
         />
       </div>

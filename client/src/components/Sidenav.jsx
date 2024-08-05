@@ -3,7 +3,7 @@ import links from '../config/links';
 
 import { IoLogOut } from "react-icons/io5";
 import { useDispatch } from 'react-redux';
-import { logout } from '../redux/features/auth/authSlice';
+import { logout } from '../redux/features/auth/authThunk';
 
 const Sidenav = () => {
 

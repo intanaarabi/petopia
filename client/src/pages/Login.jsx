@@ -5,6 +5,7 @@ import { selectLoginError } from '../redux/features/auth/authSlice';
 import { motion } from 'framer-motion'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { setUserProfile } from '../redux/features/user/userThunk';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -17,6 +18,7 @@ const Login = () => {
         if (login.fulfilled.match(result)) {
           navigate('/');
         }
+        dispatch(setUserProfile())
       });
     };
   
