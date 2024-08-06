@@ -4,11 +4,12 @@ import Sidenav from './Sidenav';
 import { selectIsAuthorized, selectIsLoading } from '../redux/features/auth/authSlice';
 import { getPageTitle } from '../utils/pageTitle';
 import { FaUser } from "react-icons/fa";
+import { selectCurrentUser } from '../redux/features/user/userSlice';
 
 const PrivateRoutes = () => {
     const isAuthorized = useSelector(selectIsAuthorized);
     const isLoading = useSelector(selectIsLoading);
-
+    const user = useSelector(selectCurrentUser)
     const location = useLocation()
 
     if (isLoading) {
@@ -27,10 +28,9 @@ const PrivateRoutes = () => {
                   </div>
                   <div className='flex-grow'></div>
                   <div className='bg-white rounded-3xl items-center flex flex-row gap-4 px-4 py-2'>
-                    <p className='text-sm'>Welcome, <span className='font-bold'>Intan!</span></p>
+                    <p className='text-sm'>Welcome, <span className='inline font-bold'>{user.name}!</span></p>
                     <div className='rounded-full w-[28px] h-[28px] bg-accent-primary flex justify-center items-center'>
                         <FaUser className='text-button-primary '/>
-
                     </div>
                   </div>
                 </div>
