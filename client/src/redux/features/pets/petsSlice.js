@@ -7,29 +7,28 @@ const handleListPending = (state) => {
 };
 
 const handleListFulfilled = (state, action) => {
+    state.loading.list = false
     state.petsList = action.payload
-    state.loading.list = false
-    state.error.list = false
 };
 
-const handleListRejected = (state, action) => {
-    state.petsList = [],
+const handleListRejected = (state) => {
     state.loading.list = false
-    state.error.list = action.payload
+    state.petsList = []
 };
 
-const handleAddPending = (state) => {
-    state.loading.add = true
-}
-
-const handleAddFulfilled = (state) => {
-    state.loading.add = false
-    state.error.add = null
-}
-const handleAddRejected = (state, action) => {
-    state.loading.add = false
-    state.error.add = action.payload
-}
+const handleAdd = (state, action) => {
+  switch (action.type) {
+    case addPet.pending.type:
+      state.loading.add = true;
+      break;
+    case addPet.fulfilled.type:
+    case addPet.rejected.type:
+      state.loading.add = false;
+      break;
+    default:
+      return;
+  }
+};
 
 const petsSlice = createSlice({
     name: 'pets',
@@ -38,13 +37,6 @@ const petsSlice = createSlice({
       loading: {
         list: false,
         add: false,
-        edit: false
-      },
-      error: {
-        list: false,
-        add: false,
-        edit: false,
-        delete: false
       }
     },
     extraReducers: (builder) => {
@@ -52,13 +44,13 @@ const petsSlice = createSlice({
         .addCase(getPetList.pending, handleListPending)
         .addCase(getPetList.fulfilled, handleListFulfilled)
         .addCase(getPetList.rejected, handleListRejected)
-        .addCase(addPet.pending, handleAddPending)
-        .addCase(addPet.fulfilled, handleAddFulfilled)
-        .addCase(addPet.rejected, handleAddRejected)
+        .addCase(addPet.pending, handleAdd)
+        .addCase(addPet.fulfilled, handleAdd)
+        .addCase(addPet.rejected, handleAdd);
     },
   });
   
-  export default petsSlice.reducer;
+export default petsSlice.reducer;
   
 export const selectUserPets = (state) => state.pets.petsList;
 export const selectPetsLoading = (state) => state.pets.loading;

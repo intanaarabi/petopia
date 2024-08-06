@@ -14,17 +14,25 @@ const AddPetPopup = ({isOpen, onClose}) => {
     const dispatch = useDispatch();
 
     const onSubmit = (data) => {
-        dispatch(addPet(data)).then((result) => {
+        dispatch(addPet(data))
+        .then((result) => {
           if (addPet.fulfilled.match(result)) {
-            dispatch(getPetList())
             dispatch(showSnackbar(
                 {
                     message: 'Pet added successfully.',
                     type: SnackbarType.SUCCESS,
                     duration: 5000
                 }))
-            onClose()
+          } else if (addPet.rejected.match(result)) {
+            dispatch(showSnackbar(
+                {
+                    message: 'Unable to add pet.',
+                    type: SnackbarType.ERROR,
+                    duration: 5000
+                }))
           }
+          dispatch(getPetList())
+          onClose()
         });
     };
 

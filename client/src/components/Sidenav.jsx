@@ -24,7 +24,7 @@ const Sidenav = () => {
                     </div>
                     <div className="flex flex-col gap-6 pl-10 text-typography-secondary font-light text-sm">
                        {
-                        links.map((link,index)=> (
+                        links.filter((link)=>link.sidenav).map((link,index)=> (
                             <NavLink
                             to={link.path}
                             key={index}

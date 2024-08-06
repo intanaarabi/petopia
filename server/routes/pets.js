@@ -34,6 +34,19 @@ router.post('/', auth,  async (req, res) => {
   }
 });
 
+// Get pet details
+router.get('/:id', auth, async (req, res) => {
+  try {
+    const pet = await Pet.findById(req.params.id);
+    if (!pet) {
+      return res.status(404).json({ message: 'Pet not found' });
+    }
+    return res.json(pet);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // Get all pets for a specific user
 router.get('/', auth, async (req, res) => {
   try {

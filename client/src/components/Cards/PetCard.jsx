@@ -2,6 +2,7 @@
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { getSexIcon, getSpeciesIcon } from "../../utils/icons";
 import { getColorByIndex } from "../../utils/colors";
+import { NavLink } from "react-router-dom";
 
 const calculateAge = (birthday) => {
     const birthDate = new Date(birthday);
@@ -47,9 +48,15 @@ const PetCard = ({pet, index, mini = false}) => {
                         <div  className="flex flex-row items-center gap-3 ">
                              <p className="text-[10px] text-typography-secondary">{age}</p>
                              <div className="flex-grow"></div>
-                            <button className="text-lg rounded-xl bg-button-primary px-6 group hover:bg-accent-primary transition-all duration-300">
-                                <HiOutlineArrowLongRight  className="text-accent-primary group-hover:text-white" />
-                            </button>
+                             <NavLink
+                                to={`/pets/${pet._id}`}
+                                key={index}
+                             >
+                                <button className="text-lg rounded-xl bg-button-primary px-6 group hover:bg-accent-primary transition-all duration-300">
+                                    <HiOutlineArrowLongRight  className="text-accent-primary group-hover:text-white" />
+                                </button>
+                             </NavLink>
+
                         </div>
                     </div>
                 </div>
