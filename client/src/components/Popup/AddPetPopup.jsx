@@ -1,57 +1,93 @@
+import { useForm } from "react-hook-form";
 import Popup from "./Popup"
 import { BiSolidImageAdd } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { selectPetsLoading } from "../../redux/features/pets/petsSlice";
+import { addPet, getPetList } from "../../redux/features/pets/petsThunk";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const AddPetPopup = ({isOpen, onClose}) => {
+    const {register, handleSubmit, formState: {errors} } = useForm()
+    const loading = useSelector(selectPetsLoading)
+    const dispatch = useDispatch();
+
+    const onSubmit = (data) => {
+        dispatch(addPet(data)).then((result) => {
+          if (addPet.fulfilled.match(result)) {
+            dispatch(getPetList())
+            onClose()
+          }
+        });
+    };
 
     if (!isOpen) return null
-
-    const handleSubmit = () => onClose;
 
     return(
         <Popup onClose={onClose}>
             <div className="flex flex-col gap-4">
 
             <p className="header">Add New Pet</p>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row gap-6">
                         <div className="flex flex-col flex-grow gap-4">
                             <div className="flex flex-col gap-1">
-                                <p className="label-secondary">Name</p>
-                                <input type="text" name="text" placeholder="e.g. Cheeto" className="w-full input"/>
+                                <label 
+                                    htmlFor="name" 
+                                    className="label-secondary">Name</label>
+                                <input 
+                                    id="name"
+                                    type="text" 
+                                    {...register('name', {required: 'Name is required'})}
+                                    placeholder="e.g. Cheeto"
+                                    className={`w-full input ${errors.name ? 'border-red-500' : '' }`}
+                                />
+                                {errors.name && <span className='input-error'>{errors.name.message}</span>}
                             </div>
 
                             <div className="flex flex-row gap-6 ">
 
                                 <div className="flex flex-col gap-1 w-full">
-                                    <p className="label-secondary">Birthday</p>
-                                    <input type="date" name="date" placeholder="e.g. Cheeto" className="w-full input"/>
+                                        <label 
+                                            htmlFor="dob" 
+                                            className="label-secondary">Date of Birth</label>
+                                        <input 
+                                            id="dob"
+                                            type="date" 
+                                            {...register('dob', {required: 'Date of birth is required'})}
+                                            className={`w-full input ${errors.dob ? 'border-red-500' : '' }`}
+                                        />
+                                        {errors.dob && <span className='input-error'>{errors.dob.message}</span>}
                                 </div>
 
+                              
                                 <div className="flex flex-col gap-1 w-full">
-                                    <p className="label-secondary">Sex</p>
+                                    <label 
+                                        htmlFor="sex" 
+                                        className="label-secondary">Sex</label>
                                     <select
                                         id="sex"
-                                        name="sex"
                                         className="input w-full"
                                         defaultValue="male"
+                                        {...register('sex')}
                                     >
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                     </select>
                                 </div>
 
-
                             </div>
 
                             <div className="flex flex-row gap-6 ">
                                 <div className="flex flex-col gap-1 w-full">
-                                    <p className="label-secondary">Species</p>
+                                    <label 
+                                        htmlFor="species" 
+                                        className="label-secondary">Species</label>
                                     <select
                                         id="species"
-                                        name="species"
                                         className="input w-full"
                                         defaultValue="cat"
+                                        {...register('species')}
                                     >
                                         <option value="cat">Cat</option>
                                         <option value="dog">Dog</option>
@@ -59,8 +95,17 @@ const AddPetPopup = ({isOpen, onClose}) => {
                                 </div>
 
                                 <div className="flex flex-col gap-1 w-full">
-                                    <p className="label-secondary">Breed</p>
-                                    <input type="text" name="text" placeholder="e.g. Persian" className="w-full input"/>
+                                    <label 
+                                        htmlFor="breed" 
+                                        className="label-secondary">Breed <span className="font-normal text-[10px] inline">(optional)</span></label>
+                                    <input 
+                                        id="breed"
+                                        type="text" 
+                                        {...register('breed')}
+                                        placeholder="e.g. Persian"
+                                        className={`w-full input`}
+                                    />
+
                                 </div>
                             </div>
                         </div>
@@ -74,10 +119,31 @@ const AddPetPopup = ({isOpen, onClose}) => {
                         </button>
                     </div>
                     <div className="flex flex-col gap-1 w-full">
-                        <p className="label-secondary">Description</p>
-                        <textarea placeholder="" maxLength="300" className="w-full min-h-[70px] input py-2"/>
+                        <label 
+                            htmlFor="description" 
+                            className="label-secondary">Description</label>
+                        <textarea
+                            id="description"
+                            type="text" 
+                            {...register('description')}
+                            placeholder=""
+                            maxLength="300" 
+                            className="w-full min-h-[70px] input py-2"/>
                     </div>
-                    <button type="submit" className="bg-typography-primary rounded-lg px-4 py-2 font-bold text-white hover:opacity-80 transition-all duration-300 ">Create Pet</button>
+                    <button disabled={loading.add} type="submit" className="flex flex-row items-center justify-center gap-4 bg-typography-primary rounded-lg px-4 py-2 font-bold text-white hover:opacity-80 transition-all duration-300 ">
+                        {loading.add && (
+                           <>
+                                 <ClipLoader
+                                 color="#fff"
+                                    loading={loading}
+                                    size={15}
+                                    aria-label="Loading Spinner"
+                                    data-testid="loader"
+                                /> <p>Creating ...</p>
+                           </> 
+                        )} 
+                        {!loading.add && (<p>Create Pet</p>)}
+                    </button>
                 </div>
                 </form>
             </div>

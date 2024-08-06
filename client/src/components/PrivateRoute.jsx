@@ -4,15 +4,12 @@ import Sidenav from './Sidenav';
 import { selectIsAuthorized, selectIsLoading } from '../redux/features/auth/authSlice';
 import { getPageTitle } from '../utils/pageTitle';
 import { FaUser } from "react-icons/fa";
-import { useEffect } from 'react';
 
 const PrivateRoutes = () => {
     const isAuthorized = useSelector(selectIsAuthorized);
     const isLoading = useSelector(selectIsLoading);
 
     const location = useLocation()
-
-    useEffect(()=> console.log(isLoading, isAuthorized))
 
     if (isLoading) {
         return <div>Loading...</div>;  // Display a loading spinner or similar

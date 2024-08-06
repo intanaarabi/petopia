@@ -20,8 +20,8 @@ const calculateAge = (birthday) => {
 
 
 const PetCard = ({pet, index, mini = false}) => {
-    const {name, birthday, sex, breed, species} = pet
-    const age = calculateAge(birthday)
+    const {name, dob, sex, breed, species} = pet
+    const age = calculateAge(dob)
 
     return(
         <>
