@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectPetsLoading } from "../../redux/features/pets/petsSlice";
 import { addPet, getPetList } from "../../redux/features/pets/petsThunk";
 import ClipLoader from "react-spinners/ClipLoader";
+import { showSnackbar } from "../../redux/features/snackbar/snackbarSlice";
+import { SnackbarType } from "../../enums";
 
 const AddPetPopup = ({isOpen, onClose}) => {
     const {register, handleSubmit, formState: {errors} } = useForm()
@@ -15,6 +17,12 @@ const AddPetPopup = ({isOpen, onClose}) => {
         dispatch(addPet(data)).then((result) => {
           if (addPet.fulfilled.match(result)) {
             dispatch(getPetList())
+            dispatch(showSnackbar(
+                {
+                    message: 'Pet added successfully.',
+                    type: SnackbarType.SUCCESS,
+                    duration: 5000
+                }))
             onClose()
           }
         });

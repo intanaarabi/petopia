@@ -3,7 +3,7 @@ import api from "../../../utils/api";
 
 export const getPetList = createAsyncThunk(
     'pets/setPetList',
-    async (_, { rejectWithValue }) => {
+    async (_, {rejectWithValue }) => {
         try {
             const response = await api.get('/pets');
             return response.data

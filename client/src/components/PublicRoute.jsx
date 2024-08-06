@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadStarsPreset } from "@tsparticles/preset-stars";
 
-const AnimatedBackground = () => {
+const PublicRoute = () => {
   const [init, setInit] = useState(false);
 
   // this should be run only once per application lifetime
@@ -53,5 +53,5 @@ const AnimatedBackground = () => {
   return <></>;
 };
 
-export default AnimatedBackground;
+export default PublicRoute;
 

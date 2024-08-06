@@ -8,3 +8,9 @@ export const Species = Object.freeze({
     DOG: 'dog'
 })
 
+export const SnackbarType = Object.freeze({
+    SUCCESS: 'success',
+    ERROR: 'error',
+    INFO: 'info',
+    WARNING: 'warning'
+})

@@ -8,9 +8,10 @@ import { checkAuth } from './redux/features/auth/authThunk';
 import links from './config/links';
 import Login from './pages/Login';
 import PrivateRoutes from './components/PrivateRoute';
-import AnimatedBackground from './components/AnimatedBackground';
 import Register from './pages/Register';
 import { AnimatePresence } from 'framer-motion';
+import PublicRoute from './components/PublicRoute';
+import CommonRoute from './pages/CommonRoute';
 
 function App() {
   const dispatch = useDispatch();
@@ -23,20 +24,20 @@ function App() {
       <div className='bg-background-primary text-typography-primary'>
           <AnimatePresence>
             <Routes>
-              <Route element={<AnimatedBackground />}>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-              </Route>
+            <Route path="/" element={<CommonRoute />}>
+                <Route element={<PublicRoute />}>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                </Route>
 
-              <Route path="/" className="bg-background-primary" element={<PrivateRoutes/>}>
-                {
-                    links.map((link,index)=>(
-                      <Route key={index} path={link.path === "/" ? '' : link.path.slice(1)} element={link.component}/>
-                    ))
-                }
+                <Route path="/" element={<PrivateRoutes />}>
+                  {links.map((link, index) => (
+                    <Route key={index} path={link.path === "/" ? '' : link.path.slice(1)} element={link.component} />
+                  ))}
+                </Route>
               </Route>
             </Routes>
-         </AnimatePresence>
+         </AnimatePresence>        
       </div>
   )
 }

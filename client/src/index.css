@@ -38,3 +38,7 @@ img, span {
 .input-error {
   @apply text-red-500 font-bold text-xs
 }
+
+.card {
+  @apply bg-white shadow-2xl shadow-gray-400/30 rounded-xl
+}

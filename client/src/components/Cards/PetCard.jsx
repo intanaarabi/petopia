@@ -26,7 +26,7 @@ const PetCard = ({pet, index, mini = false}) => {
     return(
         <>
         { !mini && (
-                    <div className="bg-white shadow-2xl shadow-gray-400/30 rounded-xl p-4 flex flex-col w-[300px] min-h-[320px] gap-4">
+                    <div className="card p-4 flex flex-col w-[300px] min-h-[320px] gap-4">
                     <div className="banner relative h-2/3">
                         <div className={`${getColorByIndex(index)} w-full h-3/4 rounded-xl`}></div>
                         <div className="absolute w-[100px] h-[100px] bg-background-primary rounded-[100%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 "></div>
@@ -55,7 +55,7 @@ const PetCard = ({pet, index, mini = false}) => {
                 </div>
         )}
         { mini && (
-            <div className="bg-white shadow-2xl shadow-gray-400/30  rounded-xl p-4 flex flex-row gap-6 w-[300px]">
+            <div className="card p-4 flex flex-row gap-6 w-[300px]">
                 <div className={`${getColorByIndex(index)} min-w-[80px] min-h-[80px] rounded-2xl`}>
                 </div>
                 <div className="flex flex-col">

@@ -21,13 +21,9 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
-    if (error.response) {
-      if (error.response.status === 403) {
-        localStorage.removeItem('token');
-        store.dispatch(logout());
-        window.location.href = '/login';
-      }
-    }
+    localStorage.removeItem('token');
+    store.dispatch(logout());
+    window.location.href = '/login';
     return Promise.reject(error);
   }
 );
