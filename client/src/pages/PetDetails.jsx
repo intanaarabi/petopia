@@ -30,7 +30,7 @@ const PetDetails = () => {
   }
 
   return (
-    <div className='flex flex-col gap-2'>
+    <div className='flex flex-col gap-4'>
       <div className='flex flex-row'>
           <BackButton onClick={()=>handleNavigate()}/>
           <div className='flex-grow'></div>
@@ -38,7 +38,7 @@ const PetDetails = () => {
       </div>
       <div className='flex flex-row'>
         <div className='flex flex-col'>
-          <PetCardMetadata pet={petMetadata}/>
+          {petMetadata && (<PetCardMetadata pet={petMetadata}/>)}
         </div>
         <div className='flex flex-col'>
           
@@ -47,8 +47,6 @@ const PetDetails = () => {
         
         </div>
       </div>
-      <h1>{petMetadata.name}</h1>
-      <p>{petMetadata.description}</p>
     </div>
   );
 };

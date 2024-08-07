@@ -15,15 +15,7 @@ const handleMetadataRejected = (state) => {
 };
 
 const initialState = {
-  metadata: {
-    id: null,
-    name: null,
-    dob: null,
-    sex: null,
-    species: null,
-    breed: null,
-    description: null,
-  },
+  metadata: null,
   diet: null,
   logs: [],
   appointments: [],
