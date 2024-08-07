@@ -31,8 +31,8 @@ const Pets = () => {
             </div>
             <div className="flex flex-wrap gap-12">
                 { !loading.list && (
-                    pets.map((pet,index)=> (
-                        <PetCard key={index} pet={pet} index={index}/>
+                    pets.map((pet)=> (
+                        <PetCard key={pet.index} pet={pet}/>
                     ) ))
                 }
                 { loading.list && (

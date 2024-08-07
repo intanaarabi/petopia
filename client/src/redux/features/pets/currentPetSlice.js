@@ -14,26 +14,33 @@ const handleMetadataRejected = (state) => {
     state.loading.metadata = false
 };
 
+const initialState = {
+  metadata: {
+    id: null,
+    name: null,
+    dob: null,
+    sex: null,
+    species: null,
+    breed: null,
+    description: null,
+  },
+  diet: null,
+  logs: [],
+  appointments: [],
+  loading: {
+    metadata: false,
+    diet: false,
+    logs: false,
+    appointments: false,
+  },
+};
+
 const currentPetSlice = createSlice({
     name: 'currentPet',
-    initialState: {
-      metadata: {
-        id: null,
-        name: null,
-        dob: null,
-        sex: null,
-        species: null,
-        breed: null,
-        description: null
-      },
-      diet: null,
-      logs: [],
-      appointments: [],
-      loading: {
-        metadata: false,
-        diet: false,
-        logs: false,
-        appointments: false
+    initialState,
+    reducers: {
+      resetCurrentPet: () => {
+        return initialState;
       },
     },
     extraReducers: (builder) => {
@@ -46,6 +53,7 @@ const currentPetSlice = createSlice({
   
 
 export default currentPetSlice.reducer;
-  
+export const { resetCurrentPet } = currentPetSlice.actions;
+
 export const selectCurrentPetMetadata = (state) => state.currentPet.metadata;
 export const selectCurrentPetLoading = (state) => state.currentPet.loading;

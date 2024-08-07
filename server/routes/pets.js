@@ -37,11 +37,20 @@ router.post('/', auth,  async (req, res) => {
 // Get pet details
 router.get('/:id', auth, async (req, res) => {
   try {
-    const pet = await Pet.findById(req.params.id);
-    if (!pet) {
+    const pets = await Pet.find({ owner: req.user });
+    const petIndex = pets.findIndex(pet => pet._id.toString() === req.params.id);
+
+    if (petIndex === -1) {
       return res.status(404).json({ message: 'Pet not found' });
     }
-    return res.json(pet);
+
+    const pet = pets[petIndex].toObject(); // Convert Mongoose document to plain object
+    const petWithIndex = {
+      ...pet,
+      index: petIndex 
+    };
+
+    return res.json(petWithIndex);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -51,7 +60,14 @@ router.get('/:id', auth, async (req, res) => {
 router.get('/', auth, async (req, res) => {
   try {
     const pets = await Pet.find({ owner: req.user });
-    res.json(pets);
+    const petsWithIndex = pets.map((pet, index) => {
+      const petObj = pet.toObject(); // Convert Mongoose document to plain object
+      return {
+        ...petObj,
+        index: index, // Add the index
+      };
+    });
+    res.json(petsWithIndex);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

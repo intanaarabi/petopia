@@ -1,12 +1,16 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrentPetLoading, selectCurrentPetMetadata } from '../redux/features/pets/currentPetSlice';
+import { resetCurrentPet, selectCurrentPetLoading, selectCurrentPetMetadata } from '../redux/features/pets/currentPetSlice';
 import { getPetDetails } from '../redux/features/pets/currentPetThunk';
+import BackButton from '../components/Buttons/BackButton';
+import DeleteButton from '../components/Buttons/DeleteButton';
+import PetCardMetadata from '../components/Cards/PetCardMetadata';
 
 const PetDetails = () => {
   const { petId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const petMetadata = useSelector(selectCurrentPetMetadata);
   const petLoading = useSelector(selectCurrentPetLoading)
 
@@ -16,12 +20,33 @@ const PetDetails = () => {
     }
   }, [dispatch, petId]);
 
+  const handleNavigate = () => {
+    dispatch(resetCurrentPet())
+    navigate(`/pets`);
+  };
+
   if (petLoading.metadata) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div>
+    <div className='flex flex-col gap-2'>
+      <div className='flex flex-row'>
+          <BackButton onClick={()=>handleNavigate()}/>
+          <div className='flex-grow'></div>
+          <DeleteButton/>
+      </div>
+      <div className='flex flex-row'>
+        <div className='flex flex-col'>
+          <PetCardMetadata pet={petMetadata}/>
+        </div>
+        <div className='flex flex-col'>
+          
+        </div>
+        <div className='flex flex-col'>
+        
+        </div>
+      </div>
       <h1>{petMetadata.name}</h1>
       <p>{petMetadata.description}</p>
     </div>
