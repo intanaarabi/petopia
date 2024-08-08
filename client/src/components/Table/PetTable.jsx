@@ -1,4 +1,4 @@
-const Table = ({data,columns}) => {
+const PetTable = ({data,columns}) => {
     return (
         <table className="table-fixed">
             <thead className="border-b text-left text-sm text-typography-secondary"> 
@@ -29,4 +29,4 @@ const Table = ({data,columns}) => {
     )
 }
 
-export default Table
+export default PetTable
