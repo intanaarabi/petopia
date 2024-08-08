@@ -6,6 +6,7 @@ import { getPetDetails } from '../redux/features/pets/currentPetThunk';
 import BackButton from '../components/Buttons/BackButton';
 import DeleteButton from '../components/Buttons/DeleteButton';
 import PetCardMetadata from '../components/Cards/PetCardMetadata';
+import PetCardLogs from '../components/Cards/PetCardLogs';
 
 const PetDetails = () => {
   const { petId } = useParams();
@@ -36,12 +37,13 @@ const PetDetails = () => {
           <div className='flex-grow'></div>
           <DeleteButton/>
       </div>
-      <div className='flex flex-row'>
+      <div className='flex flex-row gap-6'>
         <div className='flex flex-col'>
           {petMetadata && (<PetCardMetadata pet={petMetadata}/>)}
         </div>
-        <div className='flex flex-col'>
-          
+        <div className='flex flex-col gap-6'>
+          <PetCardLogs type="Health"/>
+          <PetCardLogs/>
         </div>
         <div className='flex flex-col'>
         

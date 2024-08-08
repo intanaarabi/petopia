@@ -40,5 +40,5 @@ img, span {
 }
 
 .card {
-  @apply bg-white shadow-2xl shadow-gray-400/30 rounded-xl
+  @apply bg-white shadow-2xl shadow-gray-400/10 rounded-2xl
 }
