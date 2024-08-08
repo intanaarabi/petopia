@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetCurrentPet, selectCurrentPetLoading, selectCurrentPetMetadata } from '../redux/features/pets/currentPetSlice';
-import { getPetDetails } from '../redux/features/pets/currentPetThunk';
+import { resetCurrentPet, selectCurrentPetLoading, selectCurrentPetLogs, selectCurrentPetMetadata } from '../redux/features/pets/currentPetSlice';
+import { getPetDetails, getPetLogs } from '../redux/features/pets/currentPetThunk';
 import BackButton from '../components/Buttons/BackButton';
 import DeleteButton from '../components/Buttons/DeleteButton';
 import PetCardMetadata from '../components/Cards/PetCardMetadata';
@@ -14,11 +14,13 @@ const PetDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const petMetadata = useSelector(selectCurrentPetMetadata);
+  const petLogs = useSelector(selectCurrentPetLogs);
   const petLoading = useSelector(selectCurrentPetLoading)
 
   useEffect(() => {
     if (petId) {
       dispatch(getPetDetails(petId));
+      dispatch(getPetLogs(petId));
     }
   }, [dispatch, petId]);
 
@@ -43,8 +45,8 @@ const PetDetails = () => {
           {petMetadata && (<PetCardMetadata pet={petMetadata}/>)}
         </div>
         <div className='flex flex-col gap-6'>
-          <PetCardLogs category={LogsCategoryType.HEALTH}/>
-          <PetCardLogs  category={LogsCategoryType.GROWTH}/>
+          <PetCardLogs category={LogsCategoryType.HEALTH} logs={petLogs}/>
+          <PetCardLogs  category={LogsCategoryType.GROWTH} logs={petLogs}/>
         </div>
         <div className='flex flex-col'>
         

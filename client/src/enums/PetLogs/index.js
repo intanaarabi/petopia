@@ -5,8 +5,8 @@ export const LogsCategoryType = Object.freeze({
 })
 
 export const LogsType = Object.freeze({
-    VACCINATION: "health",
-    MEDICATION: "growth",
+    VACCINATION: "vaccination",
+    MEDICATION: "medication",
     MEDICAL_HISTORY: "medical",
     GROOMING: "grooming",
     WEIGHT: "weight"
@@ -20,10 +20,10 @@ export const categoryLogTypes = {
 export const logsColDefinitions = {
     [LogsType.VACCINATION]: [
       { header: 'Vaccine Name', accessor: 'vaccineName' },
-      { header: 'Received On', accessor: 'receivedOn' },
-      { header: 'Due Date', accessor: 'dueDate' },
-      { header: 'Veterinary', accessor: 'veterinary' },
-      { header: 'Notes', accessor: 'notes' },
+      { header: 'Received On', accessor: 'dateGiven' },
+      { header: 'Due Date', accessor: 'dateDue' },
+      { header: 'Administered By', accessor: 'administeredBy' },
+      { header: 'Clinic', accessor: 'clinic'},
     ],
     [LogsType.MEDICAL_HISTORY]: [
       { header: 'Condition', accessor: 'condition' },

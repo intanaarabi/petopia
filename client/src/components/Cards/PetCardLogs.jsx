@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import AddButton from '../Buttons/AddButton';
 import { categoryLogTypes, LogsCategoryType, logsColDefinitions } from '../../enums/PetLogs';
 import PetTable from '../Table/PetTable';
@@ -10,7 +10,7 @@ const FilterButtons = ({ filters, currentFilter, onFilterChange }) => (
       <button
         key={filter}
         onClick={() => onFilterChange(filter)}
-        className={` rounded-xl text-button-accent hover:bg-button-primary px-4 transition-all duration-300 ${currentFilter === filter ? 'bg-button-primary' : 'bg-white'}`}
+        className={`capitalize rounded-xl text-button-accent hover:bg-button-primary px-4 transition-all duration-300 ${currentFilter === filter ? 'bg-button-primary' : 'bg-white'}`}
       >
         {filter}
       </button>
@@ -23,7 +23,7 @@ const PetCardLogs = ({ category, logs }) => {
   const initialFilter = categoryLogTypes[category][0];
   const [logsFilter, setLogsFilter] = useState(initialFilter);
 
-  const filteredLogs = useMemo(() => logs?.filter(log => log.type === logsFilter), [logs, logsFilter]);
+  const filteredLogs = useMemo(() => logs?.filter(log => log.type === logsFilter).map(log => log.details), [logs, logsFilter]);
 
   return (
     <div className="card py-6 px-7 flex flex-col gap-4">
