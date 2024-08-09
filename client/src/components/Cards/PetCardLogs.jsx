@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import AddButton from '../Buttons/AddButton';
 import { categoryLogTypes, LogsCategoryType, logsColDefinitions } from '../../enums/PetLogs';
 import PetTable from '../Table/PetTable';
@@ -26,7 +26,7 @@ const PetCardLogs = ({ category, logs }) => {
   const filteredLogs = useMemo(() => logs?.filter(log => log.type === logsFilter).map(log => log.details), [logs, logsFilter]);
 
   return (
-    <div className="card py-6 px-7 flex flex-col gap-4">
+    <div className="card py-6 px-7 flex flex-col gap-4 max-w-[800px]">
       <div className="flex flex-row gap-2">
         <p className="font-bold text-md">{category === LogsCategoryType.HEALTH ? 'Health Logs' : 'Growth and Wellness Logs'}</p>
         <div className="flex-grow min-w-[170px]"></div>
