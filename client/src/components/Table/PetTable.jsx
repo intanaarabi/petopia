@@ -49,7 +49,9 @@ import { useState } from 'react';
             {table.getRowModel().rows.length > 0 ? (
                 table.getRowModel().rows.map(row => {
                     return (
-                    <tr key={row.id}>
+                    <tr 
+                    
+                    key={row.id}>
                         {row.getVisibleCells().map(cell => {
                         return (
                             <td key={cell.id} className='pt-4 font-bold'>

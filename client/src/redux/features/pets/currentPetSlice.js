@@ -27,6 +27,7 @@ const handleLogsRejected = (state) => {
   state.loading.logs = false
 };
 
+
 const initialState = {
   metadata: null,
   diet: null,

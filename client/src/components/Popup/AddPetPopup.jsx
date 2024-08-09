@@ -150,8 +150,7 @@ const AddPetPopup = ({isOpen, onClose}) => {
                         {loading.add && (
                            <>
                                  <ClipLoader
-                                 color="#fff"
-                                    loading={loading}
+                                    color="#fff"
                                     size={15}
                                     aria-label="Loading Spinner"
                                     data-testid="loader"

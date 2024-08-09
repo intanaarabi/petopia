@@ -65,8 +65,8 @@ const columnHelper = createColumnHelper();
         inputType: 'text',
         required: true,
       }),
-      columnHelper.accessor('medication', {
-        header: () => 'Medication',
+      columnHelper.accessor('treatment', {
+        header: () => 'Treatment',
         cell: info => info.getValue(),
         footer: info => info.column.id,
         inputType: 'text',
@@ -102,12 +102,19 @@ const columnHelper = createColumnHelper();
         inputType: 'text',
         required: true
       }),
+      columnHelper.accessor('medicationType', {
+        header: () => 'Type',
+        cell: info => info.getValue(),
+        footer: info => info.column.id,
+        inputType: 'text',
+        required: true
+      }),
       columnHelper.accessor('dosage', {
         header: () => 'Dosage',
         cell: info => info.getValue(),
         footer: info => info.column.id,
         inputType: 'text', 
-        required: true
+        required: false
       }),
       columnHelper.accessor('startDate', {
         header: () => 'Start Date',

@@ -4,7 +4,7 @@ const logSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ['vaccination','medicine','medical','grooming','weight']
+    enum: ['vaccination','medication','medical','grooming','weight']
   },
   pet: {
     type: mongoose.Schema.Types.ObjectId,

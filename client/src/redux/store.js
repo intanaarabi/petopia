@@ -4,6 +4,7 @@ import userReducer from './features/user/userSlice'
 import petsReducer from './features/pets/petsSlice'
 import currentPetReducer from './features/pets/currentPetSlice'
 import snackbarReducer from './features/snackbar/snackbarSlice'
+import logsReducer from './features/petLogs/logsSlice'
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     pets: petsReducer,
     currentPet: currentPetReducer,
     snackbar: snackbarReducer,
+    logs: logsReducer
   },
   devTools: true 
 });
