@@ -25,26 +25,36 @@ const columnHelper = createColumnHelper();
         header: () => 'Vaccine Name',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'text', 
+        required: true,
       }),
       columnHelper.accessor('dateGiven', {
         header: () => 'Received On',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'date', 
+        required: true,
       }),
       columnHelper.accessor('dateDue', {
         header: () => 'Due Date',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'date',
+        required: true,
       }),
       columnHelper.accessor('administeredBy', {
         header: () => 'Administered By',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'text', 
+        required: true,
       }),
       columnHelper.accessor('clinic', {
         header: () => 'Clinic',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'text', 
+        required: true,
       }),
     ],
     [LogsType.MEDICAL_HISTORY]: [
@@ -52,21 +62,36 @@ const columnHelper = createColumnHelper();
         header: () => 'Condition',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'text',
+        required: true,
       }),
-      columnHelper.accessor('diagnosedOn', {
+      columnHelper.accessor('medication', {
+        header: () => 'Medication',
+        cell: info => info.getValue(),
+        footer: info => info.column.id,
+        inputType: 'text',
+        required: true,
+      }),
+      columnHelper.accessor('dateDiagnosed', {
         header: () => 'Diagnosed On',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'date',
+        required: true,
       }),
-      columnHelper.accessor('treatment', {
-        header: () => 'Treatment',
+      columnHelper.accessor('diagnosedBy', {
+        header: () => 'Diagnosed By',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'text', 
+        required: false,
       }),
-      columnHelper.accessor('notes', {
-        header: () => 'Notes',
+      columnHelper.accessor('clinic', {
+        header: () => 'Clinic',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'text', 
+        required: false
       }),
     ],
     [LogsType.MEDICATION]: [
@@ -74,60 +99,75 @@ const columnHelper = createColumnHelper();
         header: () => 'Medication Name',
         cell: info => info.getValue(),
         footer: info => info.column.id,
-      }),
-      columnHelper.accessor('startDate', {
-        header: () => 'Start Date',
-        cell: info => info.getValue(),
-        footer: info => info.column.id,
-      }),
-      columnHelper.accessor('endDate', {
-        header: () => 'End Date',
-        cell: info => info.getValue(),
-        footer: info => info.column.id,
+        inputType: 'text',
+        required: true
       }),
       columnHelper.accessor('dosage', {
         header: () => 'Dosage',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'text', 
+        required: true
       }),
-      columnHelper.accessor('notes', {
-        header: () => 'Notes',
+      columnHelper.accessor('startDate', {
+        header: () => 'Start Date',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'date',
+        required: true
+      }),
+      columnHelper.accessor('endDate', {
+        header: () => 'End Date',
+        cell: info => info.getValue(),
+        footer: info => info.column.id,
+        inputType: 'date',
+        required: false
       }),
     ],
     [LogsType.GROOMING]: [
-      columnHelper.accessor('groomingDate', {
+      columnHelper.accessor('type', {
+        header: () => 'Grooming Type',
+        cell: info => info.getValue(),
+        footer: info => info.column.id,
+        inputType: 'text',
+        required: true
+      }),
+      columnHelper.accessor('dateGrooming', {
         header: () => 'Grooming Date',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'date',
+        required: true
       }),
       columnHelper.accessor('groomer', {
         header: () => 'Groomer',
         cell: info => info.getValue(),
         footer: info => info.column.id,
-      }),
-      columnHelper.accessor('notes', {
-        header: () => 'Notes',
-        cell: info => info.getValue(),
-        footer: info => info.column.id,
+        inputType: 'text',
+        required: true
       }),
     ],
     [LogsType.WEIGHT]: [
       columnHelper.accessor('weight', {
-        header: () => 'Weight',
+        header: () => 'Weight (kg)',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'number',
+        required: true
       }),
       columnHelper.accessor('date', {
         header: () => 'Date',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'date',
+        required: true
       }),
       columnHelper.accessor('notes', {
         header: () => 'Notes',
         cell: info => info.getValue(),
         footer: info => info.column.id,
+        inputType: 'textarea',
+        required: false
       }),
     ],
   };

@@ -2,10 +2,11 @@ import { useState, useMemo } from 'react';
 import AddButton from '../Buttons/AddButton';
 import { categoryLogTypes, LogsCategoryType, logsColDefinitions } from '../../enums/PetLogs';
 import PetTable from '../Table/PetTable';
+import AddLogPopup from '../Popup/AddLogPopup';
 
 
 const FilterButtons = ({ filters, currentFilter, onFilterChange }) => (
-  <div className="flex flex-row gap-8 text-sm font-bold">
+  <div className="flex flex-row gap-8 text-sm font-bold pr-8">
     {filters.map((filter) => (
       <button
         key={filter}
@@ -15,13 +16,16 @@ const FilterButtons = ({ filters, currentFilter, onFilterChange }) => (
         {filter}
       </button>
     ))}
-    <AddButton mini={true} />
   </div>
 );
 
 const PetCardLogs = ({ category, logs }) => {
   const initialFilter = categoryLogTypes[category][0];
   const [logsFilter, setLogsFilter] = useState(initialFilter);
+
+  const [isPopupOpen,setIsPopupOpen] = useState(false)
+  const openPopup = () => setIsPopupOpen(true)
+  const closePopup = () => setIsPopupOpen(false)
 
   const filteredLogs = useMemo(() => logs?.filter(log => log.type === logsFilter).map(log => log.details), [logs, logsFilter]);
 
@@ -35,11 +39,13 @@ const PetCardLogs = ({ category, logs }) => {
           currentFilter={logsFilter}
           onFilterChange={setLogsFilter}
         />
+        <AddButton mini={true} onClick={openPopup} />
       </div>
       <PetTable
         data={filteredLogs}
         columns={logsColDefinitions[logsFilter]}
       />
+      <AddLogPopup logType={logsFilter} isOpen={isPopupOpen} onClose={closePopup}/>
     </div>
   );
 };
