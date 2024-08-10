@@ -81,7 +81,7 @@ const AddLogPopup = ({logType, isOpen, onClose}) => {
                         ))}
 
                         </div>
-                        <button disabled={loading.add} type="submit" className="flex flex-row items-center justify-center gap-4 bg-typography-primary rounded-lg px-4 py-2 font-bold text-white hover:opacity-80 transition-all duration-300 ">
+                        <button disabled={loading.add} type="submit" className="flex flex-row items-center justify-center gap-4 bg-typography-primary rounded-lg px-4 py-2 mt-2 font-bold text-white hover:opacity-80 transition-all duration-300 ">
                         {loading.add && (
                            <>
                                  <ClipLoader

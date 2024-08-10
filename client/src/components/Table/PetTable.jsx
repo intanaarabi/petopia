@@ -17,7 +17,6 @@ import { useState } from 'react';
       const table = useReactTable({
         columns,
         data,
-        debugTable: true,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         onPaginationChange: setPagination,

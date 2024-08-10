@@ -8,6 +8,7 @@ import DeleteButton from '../components/Buttons/DeleteButton';
 import PetCardMetadata from '../components/Cards/PetCardMetadata';
 import PetCardLogs from '../components/Cards/PetCardLogs';
 import { LogsCategoryType } from '../enums/PetLogs';
+import PetCardCalendar from '../components/Cards/PetCardCalendar';
 
 const PetDetails = () => {
   const { petId } = useParams();
@@ -49,7 +50,7 @@ const PetDetails = () => {
           <PetCardLogs  category={LogsCategoryType.GROWTH} logs={petLogs}/>
         </div>
         <div className='flex flex-col'>
-        
+          <PetCardCalendar/>
         </div>
       </div>
     </div>
