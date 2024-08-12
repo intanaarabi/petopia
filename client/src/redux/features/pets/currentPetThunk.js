@@ -26,3 +26,15 @@ export const getPetLogs = createAsyncThunk(
     }
 )
 
+export const getPetEvents = createAsyncThunk(
+    'pets/getPetEvents',
+    async (petId, { rejectWithValue }) => {
+        try {
+            const response = await api.get(`/pets/${petId}/events`);
+            return response.data
+        } catch (err) {
+            return rejectWithValue(err.message)
+        }
+    }
+)
+

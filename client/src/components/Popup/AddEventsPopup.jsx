@@ -4,14 +4,16 @@ import Popup from "./Popup"
 import { useDispatch, useSelector } from "react-redux"
 import { selectCurrentPetMetadata } from "../../redux/features/pets/currentPetSlice"
 import ClipLoader from "react-spinners/ClipLoader"
-import { selectLogsLoading } from "../../redux/features/petLogs/logsSlice"
 import { useEffect, useState } from "react"
+import { addPetEvents } from "../../redux/features/petEvents/eventsThunk"
+import { getPetEvents } from "../../redux/features/pets/currentPetThunk"
+import { selectEventsLoading } from "../../redux/features/petEvents/eventsSlice"
 
 const AddEventsPopup = ({isOpen, onClose}) => {
     const {register, handleSubmit, setValue, formState: {errors}, reset } = useForm()
     const dispatch = useDispatch()
     const pet = useSelector(selectCurrentPetMetadata)
-    const loading = useSelector(selectLogsLoading)
+    const loading = useSelector(selectEventsLoading)
     const [isAllDay, setIsAllDay] = useState(false);
 
     useEffect(() => {
@@ -24,7 +26,15 @@ const AddEventsPopup = ({isOpen, onClose}) => {
     if (!isOpen) return null
 
     const onSubmit = (data) => {
-      console.log(data)
+        const eventBody = {
+            ...data,
+            petId: pet._id,
+        }
+        dispatch(addPetEvents(eventBody))
+        .then(() => {
+            dispatch(getPetEvents(pet._id))
+            onClose()
+        })
     }
 
 

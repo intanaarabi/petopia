@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getPetDetails, getPetLogs } from "./currentPetThunk";
+import { getPetDetails, getPetEvents, getPetLogs } from "./currentPetThunk";
 
 const handleMetadataPending = (state) => {
     state.loading.metadata = true
@@ -27,17 +27,30 @@ const handleLogsRejected = (state) => {
   state.loading.logs = false
 };
 
+const handleEventsPending = (state) => {
+  state.loading.events = true
+};
+
+const handleEventsFulfilled = (state, action) => {
+  state.loading.events = false
+  state.events = action.payload
+};
+
+const handleEventsRejected = (state) => {
+  state.loading.events = false
+};
+
 
 const initialState = {
   metadata: null,
   diet: null,
   logs: [],
-  appointments: [],
+  events: [],
   loading: {
     metadata: false,
     diet: false,
     logs: false,
-    appointments: false,
+    events: false,
   },
 };
 
@@ -57,6 +70,9 @@ const currentPetSlice = createSlice({
         .addCase(getPetLogs.pending, handleLogsPending)
         .addCase(getPetLogs.fulfilled, handleLogsFulfilled)
         .addCase(getPetLogs.rejected, handleLogsRejected)
+        .addCase(getPetEvents.pending, handleEventsPending)
+        .addCase(getPetEvents.fulfilled, handleEventsFulfilled)
+        .addCase(getPetEvents.rejected, handleEventsRejected)
     },
   });
   
@@ -66,4 +82,5 @@ export const { resetCurrentPet } = currentPetSlice.actions;
 
 export const selectCurrentPetMetadata = (state) => state.currentPet.metadata;
 export const selectCurrentPetLogs = (state) => state.currentPet.logs;
+export const selectCurrentPetEvents = (state) => state.currentPet.events;
 export const selectCurrentPetLoading = (state) => state.currentPet.loading;

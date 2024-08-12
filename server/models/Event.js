@@ -34,6 +34,10 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum: ['veterinary','grooming']
+  },
+  dateRanges: {
+    type: Array,
+    required: false
   }
 });
 

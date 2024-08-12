@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetCurrentPet, selectCurrentPetLoading, selectCurrentPetLogs, selectCurrentPetMetadata } from '../redux/features/pets/currentPetSlice';
-import { getPetDetails, getPetLogs } from '../redux/features/pets/currentPetThunk';
+import { resetCurrentPet, selectCurrentPetEvents, selectCurrentPetLoading, selectCurrentPetLogs, selectCurrentPetMetadata } from '../redux/features/pets/currentPetSlice';
+import { getPetDetails, getPetEvents, getPetLogs } from '../redux/features/pets/currentPetThunk';
 import BackButton from '../components/Buttons/BackButton';
 import DeleteButton from '../components/Buttons/DeleteButton';
 import PetCardMetadata from '../components/Cards/PetCardMetadata';
@@ -16,12 +16,14 @@ const PetDetails = () => {
   const navigate = useNavigate();
   const petMetadata = useSelector(selectCurrentPetMetadata);
   const petLogs = useSelector(selectCurrentPetLogs);
+  const petEvents = useSelector(selectCurrentPetEvents)
   const petLoading = useSelector(selectCurrentPetLoading)
 
   useEffect(() => {
     if (petId) {
       dispatch(getPetDetails(petId));
       dispatch(getPetLogs(petId));
+      dispatch(getPetEvents(petId));
     }
   }, [dispatch, petId]);
 
@@ -50,7 +52,7 @@ const PetDetails = () => {
           <PetCardLogs  category={LogsCategoryType.GROWTH} logs={petLogs}/>
         </div>
         <div className='flex flex-col'>
-          <PetCardCalendar/>
+          <PetCardCalendar events={petEvents}/>
         </div>
       </div>
     </div>

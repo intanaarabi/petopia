@@ -99,9 +99,9 @@ router.get('/:id/events', auth, async (req, res) => {
       return res.status(404).json({ message: 'Pet not found' });
     }
 
-    const logs = await Event.find({pet: req.params.id})
+    const events = await Event.find({pet: req.params.id})
 
-    return res.json(logs);
+    return res.json(events);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
