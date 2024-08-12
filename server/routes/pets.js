@@ -3,6 +3,7 @@ const Pet = require('../models/Pet');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
 const Log = require('../models/Log');
+const Event = require('../models/Event');
 
 const router = express.Router();
 
@@ -90,6 +91,21 @@ router.get('/:id/logs', auth, async (req, res) => {
   }
 });
 
+// Get events for a specific pet
+router.get('/:id/events', auth, async (req, res) => {
+  try {
+    const pet = await Pet.findById(req.params.id)
+    if (pet === -1) {
+      return res.status(404).json({ message: 'Pet not found' });
+    }
+
+    const logs = await Event.find({pet: req.params.id})
+
+    return res.json(logs);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 
 module.exports = router;

@@ -53,12 +53,11 @@ const PetCardCalendar = () => {
             </div>
             <div className='card p-6 flex flex-col gap-4 '>
                 <div className='flex flex-col'>
-                        <p className="font-bold text-md flex flex-row">
-                            Today's Events
+                        <div className="font-bold text-md flex flex-row">
+                            <p>Today's Events</p>
                             <div className='flex-grow'></div>
                             <AddButton mini={true} onClick={openPopup}/>
-                
-                        </p>
+                        </div>
                         <span><p className="label-secondary">{formattedDate}</p></span>
                 </div>
                 <div className='relative border-[1px] border-background-primary rounded-xl shadow-2xl shadow-gray-400/50 p-4 flex flex-row gap-4 overflow-hidden'>
