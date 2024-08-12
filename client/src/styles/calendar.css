@@ -59,16 +59,7 @@
 .react-calendar__month-view__weekNumbers {
   font-weight: bold;
 }
-.react-calendar__month-view__weekNumbers .react-calendar__tile {
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75em;
-  padding: calc(0.75em / 0.75) calc(0.5em / 0.75); */
-}
-/* .react-calendar__month-view__days__day--weekend {
-  color: #d10000;
-} */
+
 .react-calendar__month-view__days__day--neighboringMonth {
   @apply text-typography-secondary
 }
@@ -78,14 +69,14 @@
   
 }
 .react-calendar__tile {
-  @apply py-3 text-sm font-medium
+  @apply h-[45px] text-sm font-medium
 }
 .react-calendar__tile:disabled {
   background-color: #f0f0f0;
 }
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-    @apply bg-button-primary text-button-accent rounded-full
+    @apply bg-button-primary text-button-accent rounded-full transition-all duration-300
 }
 .react-calendar__tile--now {
   @apply bg-button-accent text-white rounded-full
