@@ -57,8 +57,6 @@ function generateDateRanges(startDate, startTime, endDate, endTime) {
     const dates = [];
     let currentDate = new Date(start);
 
-    console.log("Start Date:", start);
-    console.log("End Date:", end);
 
     while (currentDate <= end) {
         const isStartDate = currentDate.toISOString().split('T')[0] === startDate;
@@ -81,7 +79,6 @@ function generateDateRanges(startDate, startTime, endDate, endTime) {
         }
     }
 
-    console.log("Generated Dates:", dates);
     return dates;
 }
 
