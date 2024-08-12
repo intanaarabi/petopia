@@ -103,3 +103,20 @@
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #a80c0c;
 }
+
+.custom-marker {
+  @apply text-button-accent /* Default color */
+}
+
+/* When the tile is the current date (today) */
+.react-calendar__tile--now .custom-marker {
+  @apply text-white
+}
+.react-calendar__tile--now:enabled:hover .custom-marker,
+.react-calendar__tile--now:enabled:focus .custom-marker {
+  @apply text-button-accent
+}
+/* When the tile is active (selected) */
+.react-calendar__tile--active .custom-marker {
+  @apply text-button-accent; /* Color for active (selected) */
+}

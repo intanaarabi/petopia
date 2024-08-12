@@ -5,8 +5,8 @@ import { useMemo, useState } from 'react';
 import AddEventsPopup from '../Popup/AddEventsPopup';
 
 const PetEventMarker = () => {
-    return <MdOutlinePets className='m-auto text-button-accent text-xs'/>
-}
+    return <MdOutlinePets className={"m-auto text-xs custom-marker"} />;
+};
 
 const PetCardCalendar = ({events}) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false)
@@ -21,7 +21,8 @@ const PetCardCalendar = ({events}) => {
 
     // Convert selectedDate to a comparable string format
     const selectedDateString = useMemo(() => {
-        return selectedDate.toISOString().split('T')[0];
+        const utcDate = new Date(Date.UTC(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()));
+        return utcDate.toISOString().split('T')[0];
     }, [selectedDate]);
 
     // Return event objects that have dates within selectedDate
@@ -52,13 +53,14 @@ const PetCardCalendar = ({events}) => {
         <>
            <div className='flex gap-4 flex-col'>
             <div className='card p-6'>
-                <Calendar
+            <Calendar
+                    onClickDay={(val) => setSelectedDate(val)}
                     tileContent={({ date, view }) =>
-                    view === 'month' && isDateMarked(date) ? (
-                        <PetEventMarker/>
-                    ) : null
+                        view === 'month' && isDateMarked(date) ? (
+                            <PetEventMarker />
+                        ) : null
                     }
-                    />
+                />
             </div>
             <div className='card p-6 flex flex-col gap-4 '>
                 <div className='flex flex-col'>
@@ -67,7 +69,7 @@ const PetCardCalendar = ({events}) => {
                             <div className='flex-grow'></div>
                             <AddButton mini={true} onClick={openPopup}/>
                         </div>
-                        <span><p className="label-secondary">{}</p></span>
+                        <span><p className="label-secondary">{selectedDateString}</p></span>
                 </div>
                 {
                     currentEvents.length > 0 ? 

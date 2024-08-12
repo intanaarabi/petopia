@@ -10,7 +10,12 @@ import { getPetEvents } from "../../redux/features/pets/currentPetThunk"
 import { selectEventsLoading } from "../../redux/features/petEvents/eventsSlice"
 
 const AddEventsPopup = ({isOpen, onClose}) => {
-    const {register, handleSubmit, setValue, formState: {errors}, reset } = useForm()
+    const {register, handleSubmit, setValue, formState: {errors}, watch, reset } = useForm()
+    const startDate = watch('startDate');
+    const startTime = watch('startTime');
+    const endDate = watch('endDate');
+    const endTime = watch('endTime');
+
     const dispatch = useDispatch()
     const pet = useSelector(selectCurrentPetMetadata)
     const loading = useSelector(selectEventsLoading)
@@ -51,6 +56,7 @@ const AddEventsPopup = ({isOpen, onClose}) => {
           setValue('endTime', '');
         }
       };
+
 
     return(
         <Popup onClose={onClose}>
@@ -132,7 +138,17 @@ const AddEventsPopup = ({isOpen, onClose}) => {
                                             <input 
                                                 id="endDate"
                                                 type="date" 
-                                                {...register('endDate', {required: 'End date is required'})}
+                                                {...register('endDate', {
+                                                    required: 'End date is required',
+                                                    validate: (value) => {
+                                                        if (startDate && value) {
+                                                            const startDateTime = new Date(`${startDate}T${startTime || '00:00'}`);
+                                                            const endDateTime = new Date(`${value}T${endTime || '00:00'}`);
+                                                            return endDateTime > startDateTime || "End date must be after start date";
+                                                        }
+                                                        return true
+                                                    }
+                                                })}
                                                 className={`w-full input ${errors.dob ? 'border-red-500' : '' }`}
                                             />
                                             {errors.endDate && <span className='input-error'>{errors.endDate.message}</span>}
@@ -145,7 +161,15 @@ const AddEventsPopup = ({isOpen, onClose}) => {
                                           <input
                                                 id="endTime"
                                                 type="time"
-                                                {...register('endTime', { required: !isAllDay })}
+                                                {...register('endTime', { 
+                                                    required: !isAllDay,
+                                                    validate: (value) => {
+                                                        if (startDate == endDate && startTime) {
+                                                            return value >= startTime || "End time must be after start time";
+                                                        }
+                                                        return true
+                                                    }
+                                                })}
                                                 disabled={isAllDay}
                                                 className={`disabled:text-typography-secondary w-full input ${errors.endTime ? 'border-red-500' : ''}`}
                                                 />

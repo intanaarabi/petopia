@@ -57,18 +57,31 @@ function generateDateRanges(startDate, startTime, endDate, endTime) {
     const dates = [];
     let currentDate = new Date(start);
 
+    console.log("Start Date:", start);
+    console.log("End Date:", end);
+
     while (currentDate <= end) {
-        const isStartDate = currentDate.toDateString() === start.toDateString();
-        const isEndDate = currentDate.toDateString() === end.toDateString();
+        const isStartDate = currentDate.toISOString().split('T')[0] === startDate;
+        const isEndDate = currentDate.toISOString().split('T')[0] === endDate;
 
         dates.push({
-            date: currentDate.toISOString().split('T')[0], 
+            date: currentDate.toISOString().split('T')[0],
             startTime: isStartDate ? startTime : '00:00',
             endTime: isEndDate ? endTime : '23:59',
         });
 
         currentDate.setDate(currentDate.getDate() + 1);
+
+        if (currentDate > end && !isEndDate) {
+            dates.push({
+                date: end.toISOString().split('T')[0],
+                startTime: '00:00',
+                endTime: endTime,
+            });
+        }
     }
+
+    console.log("Generated Dates:", dates);
     return dates;
 }
 
