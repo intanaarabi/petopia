@@ -50,18 +50,18 @@ router.put('/:id', auth,  async (req, res) => {
 router.get('/weight-data', auth, async (req, res) => {
   try {
       const weightData = await Log.find({ type: 'weight' }).populate('pet');
-      console.log(weightData)
+
       const response = weightData.reduce((acc, log) => {
           const petName = log.pet.name; // Assuming pet name is stored in the pet document
 
           const petData = acc.find(item => item.petName === petName);
           const weightEntry = { 
               weight: log.details.weight, 
-              date: log.details.date 
+              date: new Date(log.details.date).getTime() 
           };
 
           if (petData) {
-            const existingEntryIndex = petData.data.findIndex(entry => entry.date === log.details.date);
+            const existingEntryIndex = petData.data.findIndex(entry => entry.date === weightEntry.date);
               if (existingEntryIndex !== -1) {
                   petData.data[existingEntryIndex] = weightEntry;
               } else {
@@ -76,6 +76,7 @@ router.get('/weight-data', auth, async (req, res) => {
 
           return acc;
       }, []);
+      console.log(response)
 
       res.json(response);
 

@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../../utils/api";
 
 export const getPetList = createAsyncThunk(
-    'pets/setPetList',
+    'pets/getPetList',
     async (_, {rejectWithValue }) => {
         try {
             const response = await api.get('/pets');
@@ -12,6 +12,7 @@ export const getPetList = createAsyncThunk(
         }
     }
 )
+
 
 export const addPet = createAsyncThunk(
     'pets/addPet',

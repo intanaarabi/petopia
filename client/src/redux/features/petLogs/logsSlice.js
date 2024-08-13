@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addPetLog } from "./logsThunk";
+import { addPetLog, getWeightLogs } from "./logsThunk";
 
 const initialState = {
+    weightGraphData: [],
     loading: {
+      graph: false,
+      list: false,
       add: false,
       edit: false,
       delete: false,
@@ -22,6 +25,23 @@ const handleAdd = (state, action) => {
         return;
     }
 };
+
+const handleGraph = (state, action) => {
+    switch (action.type) {
+        case getWeightLogs.pending.type:
+            state.loading.graph = true;
+            break;
+        case getWeightLogs.fulfilled.type:
+            state.loading.graph = false;
+            state.weightGraphData = action.payload;
+            break;
+        case getWeightLogs.rejected.type:
+            state.loading.graph = false;
+            break;
+        default:
+        return;
+    }
+};
   
 const logsSlice = createSlice({
     name: 'logs',
@@ -31,9 +51,13 @@ const logsSlice = createSlice({
         .addCase(addPetLog.pending, handleAdd)
         .addCase(addPetLog.fulfilled, handleAdd)
         .addCase(addPetLog.rejected, handleAdd)
+        .addCase(getWeightLogs.pending, handleGraph)
+        .addCase(getWeightLogs.fulfilled, handleGraph)
+        .addCase(getWeightLogs.rejected, handleGraph)
     },
 });
 
 export default logsSlice.reducer;
 
 export const selectLogsLoading = (state) => state.logs.loading;
+export const selectWeightData = (state) => state.logs.weightGraphData;

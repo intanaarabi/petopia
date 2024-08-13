@@ -12,3 +12,15 @@ export const addPetLog = createAsyncThunk(
         }
     }
 )
+
+export const getWeightLogs = createAsyncThunk(
+    'pets/getWeightLogs',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await api.get('/logs/weight-data');
+            return response.data
+        } catch (err) {
+            return rejectWithValue(err.message)
+        }
+    }
+)
