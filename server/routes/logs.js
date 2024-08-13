@@ -33,8 +33,6 @@ router.post('/', auth,  async (req, res) => {
 
 //Edit
 router.put('/:id', auth,  async (req, res) => {
-    const { details } = req.body;
-  
     try {
       const updatedLog = await Log.findByIdAndUpdate(req.params.id, {
         details,
@@ -47,5 +45,43 @@ router.put('/:id', auth,  async (req, res) => {
       res.status(400).json({ message: err.message });
     }
   });
+
+// Weight graph data
+router.get('/weight-data', auth, async (req, res) => {
+  try {
+      const weightData = await Log.find({ type: 'weight' }).populate('pet');
+      console.log(weightData)
+      const response = weightData.reduce((acc, log) => {
+          const petName = log.pet.name; // Assuming pet name is stored in the pet document
+
+          const petData = acc.find(item => item.petName === petName);
+          const weightEntry = { 
+              weight: log.details.weight, 
+              date: log.details.date 
+          };
+
+          if (petData) {
+            const existingEntryIndex = petData.data.findIndex(entry => entry.date === log.details.date);
+              if (existingEntryIndex !== -1) {
+                  petData.data[existingEntryIndex] = weightEntry;
+              } else {
+                  petData.data.push(weightEntry);
+              }
+          } else {
+              acc.push({
+                  petName,
+                  data: [weightEntry]
+              });
+          }
+
+          return acc;
+      }, []);
+
+      res.json(response);
+
+  } catch (err) {
+      res.status(400).json({ message: err.message });
+  }
+});
 
 module.exports = router;
