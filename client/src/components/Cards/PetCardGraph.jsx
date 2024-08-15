@@ -5,6 +5,7 @@ import {
     XAxis,
     YAxis,
     CartesianGrid,
+    CartesianAxis,
     Tooltip,
     Legend,
     ResponsiveContainer
@@ -14,26 +15,63 @@ import moment from 'moment'
 const CustomTooltip = ({payload, label, active}) => {
 
     const pets = useMemo(()=> payload, [payload])
-
+    console.log(payload)
     if (active) {
         return (
-          <div className="card p-4 flex flex-col" >
-            <p>{moment(label).format("YYYY-MM-DD")}</p>
-            {pets?.map((pet) => 
+          <div className="bg-typography-primary text-white rounded-xl p-4 flex flex-col" >
+            <p className="text-sm font-bold pb-4">{moment(label).format("YYYY-MM-DD")}</p>
+            <div className="flex flex-col gap-2">
+            {pets?.map((pet,index) => 
                 (
-                    <>
-                    <div className="flex flex-row">
-                        {pet.name} - {pet.value}
+                    <div key={index} className="flex flex-row items-center gap-3 ">
+                      <div style={{backgroundColor: pet.color}} className="rounded-full w-[10px] h-[10px]"></div>
+                      <p className="text-sm">{pet.name}</p>
+                        <div className="flex-grow"></div>
+                        <p className="text-sm">{pet.value} kg</p>
                     </div>
-                    </>
                 )
             )}
+            </div>
+          
           </div>
         );
       }
     
     return null;
 }
+
+const CustomizedYAxisTick = ({x, y, stroke, payload}) => {
+      return (
+        <g transform={`translate(${x},${y})`}>
+       <text x={-10} y={0} dy={3} textAnchor="end" fill="#A3AED0" fontSize="12" >
+            {payload.value}
+          </text>
+        </g>
+      );
+}
+
+const CustomizedXAxisTick = ({x, y, stroke, payload}) => {
+      return (
+        <g transform={`translate(${x},${y})`}>
+        <text x={25} y={20} dy={3} textAnchor="end" fill="#A3AED0" fontSize="12">
+            {moment(payload.value).format("YYYY-MM")}
+          </text>
+        </g>
+      );
+}
+
+const CustomLegend = ({ payload }) => {
+  return (
+    <div className="flex flex-col gap-2 ml-16 justify-start ">
+      {payload.map((entry, index) => (
+        <div key={index} className="flex flex-row gap-4 items-center">
+          <div style={{backgroundColor: entry.color}} className="rounded-full w-[10px] h-[10px]"></div>
+          <p className="text-sm text-typography-primary font-bold">{entry.value}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const PetCardGraph = ({data}) => {
 
@@ -52,7 +90,7 @@ const PetCardGraph = ({data}) => {
       
     // Generate a unique color for each pet dynamically
     const generateColor = (index) => {
-        const colors = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042'];
+        const colors = ['#8980FF', '#FF9F6A', '#FFBAB6', '#FFD986'];
         return colors[index % colors.length];
     };
       
@@ -72,25 +110,37 @@ const PetCardGraph = ({data}) => {
                     width={500}
                     height={300}
                     data={formattedData}
-                    margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                    }}
+                    margin={{ top:5, left: -20, right: 0, bottom: 0 }} 
                 >
-                    <CartesianGrid strokeDasharray="3 3" />
+                    <CartesianGrid
+                        horizontal={false}
+                        vertical={false}
+                    />
                     <XAxis 
                         dataKey = 'date'
-                        domain = {['auto', 'auto']}
+                        domain={['dataMin', 'dataMax']} 
                         name = 'Time'
                         tickFormatter={(unixTimestamp) => moment(unixTimestamp).format("YYYY-MM")}
                         type = 'number'
-                        tickCount={12}
+                        axisLine={{ stroke: '#A3AED0' }}
+                        tick={<CustomizedXAxisTick />}
+                        tickLine={{ stroke: '#A3AED0' }} 
+                        tickSize={0}
                     />
-                    <YAxis />
+                    <YAxis  
+                        axisLine={{ stroke: '#A3AED0' }}
+                        label={{fontSize: 24}} 
+                        tickSize={0}
+                        domain = {['auto', 'auto']}
+                        tick={<CustomizedYAxisTick />}
+                        tickLine={{ stroke: '#A3AED0' }} 
+                        />
                     <Tooltip content={<CustomTooltip />}/>
-                    <Legend layout="vertical" verticalAlign="middle" align="right" />
+                    <Legend 
+                      layout="vertical" 
+                      verticalAlign="middle" 
+                      align="right" 
+                      content={<CustomLegend />}/>
                     {Object.keys(colorMapping).map((petName) => (
                         <Line
                         connectNulls
@@ -100,6 +150,7 @@ const PetCardGraph = ({data}) => {
                         name={petName}
                         data={formattedData.filter(d => d.petName === petName)}
                         stroke={colorMapping[petName]}
+                        strokeWidth={2}
                         />
                     ))}
                 </LineChart>
