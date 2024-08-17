@@ -8,10 +8,10 @@ import {
   } from '@tanstack/react-table'
 import { useState } from 'react';
   
-  const PetTable = ({ data, columns }) => {
+  const PetTable = ({ data, columns, size = 10}) => {
     const [pagination, setPagination] = useState({
         pageIndex: 0,
-        pageSize: 10,
+        pageSize: size,
       })
   
       const table = useReactTable({

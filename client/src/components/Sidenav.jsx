@@ -17,7 +17,7 @@ const Sidenav = () => {
 
     return (
         <>
-        <div className="h-full flex flex-row">
+        <div className=" flex flex-row">
             <div className="min-h-screen bg-white w-60 flex flex-col">
                     <div className="text-typography-primary font-bold text-2xl pl-10 py-6 border-b border-background-primary mb-8">
                         PETOPIA

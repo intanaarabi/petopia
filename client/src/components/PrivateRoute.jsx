@@ -23,7 +23,7 @@ const PrivateRoutes = () => {
 
     return (
       isAuthorized ? (
-            <div className='flex flex-row'>
+            <div className='h-full flex flex-row'>
             <Sidenav/>
             <div className="flex-grow flex flex-col gap-6 p-8">
               <div className='flex flex-row items-center'>

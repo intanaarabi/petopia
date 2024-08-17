@@ -24,3 +24,14 @@ export const getWeightLogs = createAsyncThunk(
         }
     }
 )
+export const getLogs = createAsyncThunk(
+    'pets/getLogs',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await api.get('/logs');
+            return response.data
+        } catch (err) {
+            return rejectWithValue(err.message)
+        }
+    }
+)

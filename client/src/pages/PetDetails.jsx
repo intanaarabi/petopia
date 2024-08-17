@@ -7,8 +7,8 @@ import BackButton from '../components/Buttons/BackButton';
 import DeleteButton from '../components/Buttons/DeleteButton';
 import PetCardMetadata from '../components/Cards/PetCardMetadata';
 import PetCardLogs from '../components/Cards/PetCardLogs';
-import { LogsCategoryType } from '../enums/PetLogs';
 import PetCardCalendar from '../components/Cards/PetCardCalendar';
+import { LogsCategoryType } from '../enums/PetLogs';
 
 const PetDetails = () => {
   const { petId } = useParams();

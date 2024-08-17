@@ -21,7 +21,7 @@ function App() {
   }, [dispatch]);
 
   return (
-      <div className='bg-background-primary text-typography-primary'>
+      <div className='bg-background-primary text-typography-primary min-h-screen'>
           <AnimatePresence>
             <Routes>
             <Route path="/" element={<CommonRoute />}>

@@ -20,12 +20,43 @@ router.post('/', auth,  async (req, res) => {
     const log = new Log({
         type,
         details,
-        pet: petId
+        pet: petId,
+        createdDate: Date.now
     })
 
     // Save the log
     const newLog = await log.save();
     res.status(201).json(newLog);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+//Batch logs
+router.post('/batch', auth, async (req, res) => {
+  const logs = req.body.logs;
+
+  try {
+    const logPromises = logs.map(async (log) => {
+      const { petId, type, details } = log;
+
+      const pet = await Pet.findById(petId);
+      if (!pet) {
+        throw new Error(`Pet with ID ${petId} not found`);
+      }
+
+      const newLog = new Log({
+        type,
+        details,
+        pet: petId,
+        createdDate: Date.now()
+      });
+
+      return await newLog.save();
+    });
+
+    const savedLogs = await Promise.all(logPromises);
+    res.status(201).json(savedLogs);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -45,6 +76,24 @@ router.put('/:id', auth,  async (req, res) => {
       res.status(400).json({ message: err.message });
     }
   });
+
+//Get all logs
+router.get('/', auth, async (req, res) => {
+  try {
+    const userPets = await Pet.find({ owner: req.user })
+    const petMap = new Map(userPets.map((pet, index) => [pet._id.toString(), { ...pet.toObject(), index }]));
+    const logs = await Log.find({ pet: { $in: Array.from(petMap.keys()) } }).populate('pet');
+
+    const logsWithIndexedPets = logs.map(log => ({
+      ...log.toObject(),
+      pet: petMap.get(log.pet._id.toString())
+    }));
+
+    return res.status(200).json(logsWithIndexedPets);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+})
 
 // Weight graph data
 router.get('/weight-data', auth, async (req, res) => {
@@ -76,8 +125,6 @@ router.get('/weight-data', auth, async (req, res) => {
 
           return acc;
       }, []);
-      console.log(response)
-
       res.json(response);
 
   } catch (err) {
