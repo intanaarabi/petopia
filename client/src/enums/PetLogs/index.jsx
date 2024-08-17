@@ -1,5 +1,8 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { getColorByIndex } from '../../utils/colors';
+import { MdNavigateNext } from "react-icons/md";
+
+
 
 export const LogsCategoryType = Object.freeze({
     HEALTH: "health",
@@ -27,6 +30,7 @@ export const categoryLogTypes = {
 };
 
 const columnHelper = createColumnHelper();
+
 
 export const genLogsColDefinitions = (openPopup) => [
   columnHelper.accessor('type', {
@@ -67,9 +71,14 @@ export const genLogsColDefinitions = (openPopup) => [
     header: () => '',
     cell: info => {
       return (
-        <button onClick={() => openPopup(info.row.original)} className=''>
-          click
-        </button>
+        <div className='flex flex-col items-end mx-2'>
+         <button onClick={() => openPopup(info.row.original)} 
+         className='flex text-button-accent gap-2 items-center justify-center rounded-full px-4 py-1 bg-button-primary group hover:bg-accent-primary transition-all duration-300'>
+          <p className='group-hover:text-white  transition-all duration-300'>View Details </p>
+          <MdNavigateNext className='group-hover:text-white text-lg  transition-all duration-300' />
+          </button>
+        </div>
+ 
         )
     },
     footer: info => info.column.id,
