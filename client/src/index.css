@@ -9,12 +9,6 @@
   font-style: normal;
 }
 
-html, body {
-  overflow: hidden;
-  height: 100%;
-}
-
-
 img, span {
   display: block
 }
