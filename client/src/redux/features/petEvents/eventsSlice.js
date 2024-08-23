@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addPetEvents } from "./eventsThunk";
+import { addPetEvents, getEvents } from "./eventsThunk";
 
 const initialState = {
+    list: [],
     loading: {
       add: false,
       edit: false,
@@ -22,6 +23,23 @@ const handleAdd = (state, action) => {
         return;
     }
 };
+
+const handleList = (state, action) => {
+    switch (action.type) {
+        case getEvents.pending.type:
+            state.loading.list = true;
+            break;
+        case getEvents.fulfilled.type:
+            state.loading.list = false;
+            state.list = action.payload;
+            break;
+        case getEvents.rejected.type:
+            state.loading.list = false;
+            break;
+        default:
+        return;
+    }
+};
   
 const eventsSlice = createSlice({
     name: 'events',
@@ -31,9 +49,13 @@ const eventsSlice = createSlice({
         .addCase(addPetEvents.pending, handleAdd)
         .addCase(addPetEvents.fulfilled, handleAdd)
         .addCase(addPetEvents.rejected, handleAdd)
+        .addCase(getEvents.pending, handleList)
+        .addCase(getEvents.fulfilled, handleList)
+        .addCase(getEvents.rejected, handleList)
     },
 });
 
 export default eventsSlice.reducer;
 
 export const selectEventsLoading = (state) => state.events.loading;
+export const selectEvents = (state) => state.events.list;

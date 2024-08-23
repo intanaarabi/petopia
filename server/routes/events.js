@@ -38,4 +38,21 @@ router.post('/', auth, async (req, res) => {
     }
 });
 
+//Get all events
+router.get('/', auth, async (req, res) => {
+    try {
+      const userPets = await Pet.find({ owner: req.user })
+      const petMap = new Map(userPets.map((pet, index) => [pet._id.toString(), { ...pet.toObject(), index }]));
+      const events = await Event.find({ pet: { $in: Array.from(petMap.keys()) } }).populate('pet');
+  
+      const eventsWithIndexedPets = events.map(event => ({
+        ...event.toObject(),
+        pet: petMap.get(event.pet._id.toString())
+      }));
+  
+      return res.status(200).json(eventsWithIndexedPets);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  })
 module.exports = router;

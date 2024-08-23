@@ -1,6 +1,7 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { getColorByIndex } from '../../utils/colors';
 import { MdNavigateNext } from "react-icons/md";
+import PetIconHover from '../../components/Misc/PetIconHover';
 
 
 
@@ -45,8 +46,7 @@ export const genLogsColDefinitions = (openPopup) => [
     cell: info => {
       const pet = info.getValue();
       return (
-        <div className={`${getColorByIndex(pet.index)} h-[20px] w-[20px] rounded-xl`}>
-        </div>
+        <PetIconHover pet={pet}/>
       );
     },
     footer: info => info.column.id,

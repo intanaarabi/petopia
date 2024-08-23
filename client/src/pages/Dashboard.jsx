@@ -8,17 +8,21 @@ import { selectUserPets } from "../redux/features/pets/petsSlice";
 import { getLogs, getWeightLogs } from "../redux/features/petLogs/logsThunk";
 import PetCardCalendar from "../components/Cards/PetCardCalendar";
 import PetCardRecentActivity from "../components/Cards/PetCardRecentActivity";
+import { getEvents } from "../redux/features/petEvents/eventsThunk";
+import { selectEvents } from "../redux/features/petEvents/eventsSlice";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
     const pets = useSelector(selectUserPets);
     const weightData = useSelector(selectWeightData);
     const logs = useSelector(selectLogs);
+    const events = useSelector(selectEvents);
     
     useEffect(() => {
       dispatch(getPetList());
       dispatch(getWeightLogs());
       dispatch(getLogs());
+      dispatch(getEvents());
     }, [dispatch]);
 
     return (<>
@@ -36,7 +40,7 @@ const Dashboard = () => {
                     <PetCardRecentActivity logs={logs}/>
                 </div>
                 <div className="flex-grow">
-                     <PetCardCalendar/>
+                     <PetCardCalendar events={events}/>
                 </div>
             </div>
         </div>

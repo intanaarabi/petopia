@@ -1,28 +1,35 @@
 import Calendar from 'react-calendar'
 import { MdOutlinePets } from 'react-icons/md';
 import AddButton from '../Buttons/AddButton';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import AddEventsPopup from '../Popup/AddEventsPopup';
 import generateDateRanges from '../../utils/dateRange';
+import PetIconHover from '../Misc/PetIconHover';
 
 const PetEventMarker = () => {
     return <MdOutlinePets className={"m-auto text-xs custom-marker"} />;
 };
 
-const PetCardCalendar = ({events}) => {
+const PetCardCalendar = ({events, }) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false)
     const [selectedDate, setSelectedDate] = useState(new Date())
     const openPopup = () => setIsPopupOpen(true)
     const closePopup = () => setIsPopupOpen(false)
 
-    // Collect all dates from dateRanges
-    const dateRanges = useMemo(() => {
-        return events?.flatMap(event => generateDateRanges(event.startDateTime, event.endDateTime, event.title, event.location)) || []
-    }, [events])
-
+    const updatedEventObj = useMemo(() => {
+        return (
+            events?.map((eventObj) => ({
+                ...eventObj, 
+                dateRanges: generateDateRanges(eventObj.startDateTime, eventObj.endDateTime)
+            })) || []
+        );
+    }, [events]);
+    
     const markedDates = useMemo(() => {
-        return dateRanges.map(range => new Date(range.date)) || []
-    }, [dateRanges]);
+        return updatedEventObj.flatMap((eventObj) => 
+            eventObj.dateRanges.map((range) => new Date(range.date))
+        );
+    }, [updatedEventObj]);
 
     const isDateMarked = (date) => {
         return markedDates.some(markedDate =>
@@ -42,16 +49,25 @@ const PetCardCalendar = ({events}) => {
 
     // Return event objects that have dates within selectedDate
     const currentEvents = useMemo(() => {
-        return dateRanges
-            .filter(range => range.date === selectedDateString)
-            .map(range => ({
-              title: range.title,
-              location: range.location,
-              date: range.date,
-              startTime: range.startTime,
-              endTime: range.endTime,
-            })) || [];
-      }, [dateRanges, selectedDateString]);
+        return updatedEventObj.flatMap(
+            (eventObj) => {
+                return eventObj.dateRanges
+                .filter(range => range.date === selectedDateString)
+                .map(range => ({
+                  pet: eventObj.pet,
+                  title: eventObj.title,
+                  location: eventObj.location,
+                  date: range.date,
+                  startTime: range.startTime,
+                  endTime: range.endTime,
+                })) || [];
+            }
+        )
+      }, [updatedEventObj, selectedDateString]);
+
+    useEffect(()=> {
+        console.log('current events', currentEvents)
+    },[currentEvents])
 
     return (
         <>
@@ -78,16 +94,19 @@ const PetCardCalendar = ({events}) => {
                 {
                     currentEvents.length > 0 ? 
                         currentEvents.map((event, index) => (
-                            <>
                             <div key={index} className='relative border-[1px] border-background-primary rounded-xl shadow-2xl shadow-gray-400/50 p-4 flex flex-row gap-4 overflow-hidden'>
                                 <div className='absolute h-full w-[10px] left-0 top-0 bg-accent-primary '></div>
-                                <div className='flex flex-col pl-4'>
-                                    <p className='label-secondary'>{event.startTime} - {event.endTime}</p>
-                                    <p className='font-bold text-typography-primary'>{event.title}</p>
-                                    <p className='label-secondary font-italic'>{event.location}</p>
+                                <div className='flex flex-row w-full items-center'>
+                                    <div className='flex flex-col pl-4'>
+                                        <p className='label-secondary'>{event.startTime} - {event.endTime}</p>
+                                        <p className='font-bold text-typography-primary'>{event.title}</p>
+                                        <p className='label-secondary font-italic'>{event.location}</p>
+                                    </div>
+                                    <div className='flex-grow'></div>`
+                                    <PetIconHover pet={event.pet}/>
                                 </div>
+                           
                             </div>
-                            </>
                         ))
                      : (
                     <> No Upcoming Events</>

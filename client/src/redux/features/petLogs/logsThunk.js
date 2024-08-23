@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../../utils/api";
 
 export const addPetLog = createAsyncThunk(
-    'pets/addPetLog',
+    'logs/addPetLog',
     async (logForm, { rejectWithValue }) => {
         try {
             const response = await api.post('/logs',logForm);
@@ -14,7 +14,7 @@ export const addPetLog = createAsyncThunk(
 )
 
 export const getWeightLogs = createAsyncThunk(
-    'pets/getWeightLogs',
+    'logs/getWeightLogs',
     async (_, { rejectWithValue }) => {
         try {
             const response = await api.get('/logs/weight-data');
@@ -25,7 +25,7 @@ export const getWeightLogs = createAsyncThunk(
     }
 )
 export const getLogs = createAsyncThunk(
-    'pets/getLogs',
+    'logs/getLogs',
     async (_, { rejectWithValue }) => {
         try {
             const response = await api.get('/logs');
