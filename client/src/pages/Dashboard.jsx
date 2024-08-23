@@ -40,7 +40,7 @@ const Dashboard = () => {
                     <PetCardRecentActivity logs={logs}/>
                 </div>
                 <div className="flex-grow">
-                     <PetCardCalendar events={events}/>
+                     <PetCardCalendar events={events} allowAdd={false}/>
                 </div>
             </div>
         </div>

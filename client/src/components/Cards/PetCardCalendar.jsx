@@ -10,7 +10,7 @@ const PetEventMarker = () => {
     return <MdOutlinePets className={"m-auto text-xs custom-marker"} />;
 };
 
-const PetCardCalendar = ({events, }) => {
+const PetCardCalendar = ({events, allowAdd = true}) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false)
     const [selectedDate, setSelectedDate] = useState(new Date())
     const openPopup = () => setIsPopupOpen(true)
@@ -87,7 +87,7 @@ const PetCardCalendar = ({events, }) => {
                         <div className="font-bold text-md flex flex-row">
                             <p>Upcoming Events</p>
                             <div className='flex-grow'></div>
-                            <AddButton mini={true} onClick={openPopup}/>
+                            {allowAdd && <AddButton mini={true} onClick={openPopup}/>}
                         </div>
                         <span><p className="label-secondary">{selectedDateString}</p></span>
                 </div>
