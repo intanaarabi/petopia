@@ -3,6 +3,7 @@ import { MdOutlinePets } from 'react-icons/md';
 import AddButton from '../Buttons/AddButton';
 import { useMemo, useState } from 'react';
 import AddEventsPopup from '../Popup/AddEventsPopup';
+import generateDateRanges from '../../utils/dateRange';
 
 const PetEventMarker = () => {
     return <MdOutlinePets className={"m-auto text-xs custom-marker"} />;
@@ -15,31 +16,13 @@ const PetCardCalendar = ({events}) => {
     const closePopup = () => setIsPopupOpen(false)
 
     // Collect all dates from dateRanges
+    const dateRanges = useMemo(() => {
+        return events?.flatMap(event => generateDateRanges(event.startDateTime, event.endDateTime, event.title, event.location)) || []
+    }, [events])
+
     const markedDates = useMemo(() => {
-        return events?.flatMap(event => event.dateRanges.map(range => new Date(range.date))) || [];
-    }, [events]);
-
-    // Convert selectedDate to a comparable string format
-    const selectedDateString = useMemo(() => {
-        const utcDate = new Date(Date.UTC(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()));
-        return utcDate.toISOString().split('T')[0];
-    }, [selectedDate]);
-
-    // Return event objects that have dates within selectedDate
-    const currentEvents = useMemo(() => {
-        return events?.flatMap(event => {
-          return event.dateRanges
-            .filter(range => range.date === selectedDateString)
-            .map(range => ({
-              title: event.title,
-              location: event.location,
-              date: range.date,
-              startTime: range.startTime,
-              endTime: range.endTime,
-            }));
-        }) || [];
-      }, [events, selectedDateString]);
-    
+        return dateRanges.map(range => new Date(range.date)) || []
+    }, [dateRanges]);
 
     const isDateMarked = (date) => {
         return markedDates.some(markedDate =>
@@ -48,6 +31,27 @@ const PetCardCalendar = ({events}) => {
             markedDate.getDate() === date.getDate()
         );
     };
+    
+    // Convert selectedDate to a comparable string format
+    const selectedDateString = useMemo(() => {
+        const year = selectedDate.getFullYear();
+        const month = String(selectedDate.getMonth() + 1).padStart(2, '0'); 
+        const day = String(selectedDate.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }, [selectedDate]);
+
+    // Return event objects that have dates within selectedDate
+    const currentEvents = useMemo(() => {
+        return dateRanges
+            .filter(range => range.date === selectedDateString)
+            .map(range => ({
+              title: range.title,
+              location: range.location,
+              date: range.date,
+              startTime: range.startTime,
+              endTime: range.endTime,
+            })) || [];
+      }, [dateRanges, selectedDateString]);
 
     return (
         <>

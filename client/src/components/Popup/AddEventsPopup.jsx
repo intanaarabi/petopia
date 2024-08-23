@@ -33,6 +33,8 @@ const AddEventsPopup = ({isOpen, onClose}) => {
     const onSubmit = (data) => {
         const eventBody = {
             ...data,
+            startDateTime: new Date(`${data.startDate}T${data.startTime}`).toISOString(),
+            endDateTime: new Date(`${data.endDate}T${data.endTime}`).toISOString(),
             petId: pet._id,
         }
         dispatch(addPetEvents(eventBody))

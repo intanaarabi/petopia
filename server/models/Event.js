@@ -14,30 +14,18 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  startDate: {
+  startDateTime: {
     type: Date,
     required: true,
   },
-  startTime: {
-    type: String,
-    required: true,
-  },
-  endDate: {
+  endDateTime: {
     type: Date,
-    required: true,
-  },
-  endTime: {
-    type: String,
     required: true,
   },
   type: {
     type: String,
     required: true,
     enum: ['veterinary','grooming']
-  },
-  dateRanges: {
-    type: Array,
-    required: false
   }
 });
 
