@@ -21,7 +21,7 @@ router.post('/', auth,  async (req, res) => {
         type,
         details,
         pet: petId,
-        createdDate: Date.now
+        createdDate: Date.now()
     })
 
     // Save the log
