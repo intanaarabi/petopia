@@ -4,6 +4,7 @@ import { getSexIcon, getSpeciesIcon } from "../../utils/icons";
 import { getColorByIndex } from "../../utils/colors";
 import { useNavigate } from "react-router-dom";
 import { calculateAge } from "../../utils/age";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 
 const PetCard = ({pet, mini = false}) => {
@@ -46,13 +47,17 @@ const PetCard = ({pet, mini = false}) => {
                 </div>
         )}
         { mini && (
-            <div className="card p-4 flex flex-row gap-6 w-[300px]">
+            <div className="card p-4 flex flex-row gap-6 min-w-[300px]">
                 <div className={`${getColorByIndex(pet.index)} min-w-[80px] min-h-[80px] rounded-2xl`}>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col w-full">
                     <div className="flex flex-row items-center gap-2">
                         <p className="font-bold text-lg">{name}</p>
-                        {getSexIcon(sex)}
+                        <div>{getSexIcon(sex)}</div>
+                        <div className="flex-grow"></div>
+                        <button  onClick={()=>handleNavigate()} className="button-primary p-2 text-xs group">
+                            <FaExternalLinkAlt className="button-primary__content" />
+                        </button>
                     </div>
                     <p className="text-xs text-typography-secondary">{breed}</p>
                     <div className="flex-grow"></div>
