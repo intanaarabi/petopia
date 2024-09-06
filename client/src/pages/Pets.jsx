@@ -18,6 +18,12 @@ const Pets = () => {
     const pets = useSelector(selectUserPets)
     const loading = useSelector(selectPetsLoading)
   
+    const [searchTerm, setSearchTerm] = useState("");
+    
+    const filteredPets = pets.filter(pet =>
+        pet.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     useEffect(() => {
       dispatch((getPetList()));
     }, [dispatch]);
@@ -26,12 +32,12 @@ const Pets = () => {
     <>
         <div className="flex flex-col gap-4">
             <div className="flex flex-row gap-4">
-                <Search/>
+                  <Search setSearchTerm={setSearchTerm} />
                 <AddButton text="New Pet" onClick={openPopup}/>
             </div>
             <div className="flex flex-wrap gap-12">
                 { !loading.list && (
-                    pets.map((pet)=> (
+                    filteredPets.map((pet)=> (
                         <PetCard key={pet.index} pet={pet}/>
                     ) ))
                 }
