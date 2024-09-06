@@ -3,7 +3,7 @@ import Popup from "./Popup"
 const ViewLogsPopup = ({data, isOpen,onClose}) => {
     if (!isOpen) return null;
 
-    return <Popup minWidth={300} onClose={onClose}>
+    return <Popup width={500} onClose={onClose}>
         <div className="flex flex-col gap-4">
           <p className="font-bold text-xl">View Log Details</p>
           <div className="flex flex-wrap gap-12">
