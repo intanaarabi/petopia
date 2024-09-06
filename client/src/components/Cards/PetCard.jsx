@@ -18,7 +18,7 @@ const PetCard = ({pet, mini = false}) => {
     return(
         <>
         { !mini && (
-                    <div className="card p-4 flex flex-col w-[300px] min-h-[310px] gap-4">
+                    <div className="card p-4 flex flex-col w-full sm:w-[300px] min-h-[310px] gap-4">
                     <div className="banner relative min-h-[180px] ">
                         <div className={`${getColorByIndex(pet.index)} w-full h-3/4 rounded-xl`}></div>
                         <div className="absolute w-[100px] h-[100px] bg-background-primary rounded-[100%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 "></div>

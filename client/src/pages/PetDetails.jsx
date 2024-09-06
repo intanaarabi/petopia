@@ -41,17 +41,17 @@ const PetDetails = () => {
       <div className='flex flex-row'>
           <BackButton onClick={()=>handleNavigate()}/>
           <div className='flex-grow'></div>
-          <DeleteButton/>
+          {/* <DeleteButton/> */}
       </div>
-      <div className='flex flex-row gap-6'>
-        <div className='flex flex-col'>
-          {petMetadata && (<PetCardMetadata pet={petMetadata}/>)}
-        </div>
-        <div className='flex flex-col gap-6'>
-          <PetCardLogs category={LogsCategoryType.HEALTH} logs={petLogs}/>
-          <PetCardLogs  category={LogsCategoryType.GROWTH} logs={petLogs}/>
-        </div>
-        <div className='flex flex-col'>
+      <div className='flex flex-wrap 2xl:flex-row gap-6'>
+          <div className='flex flex-col w-full 2xl:w-auto'>
+            {petMetadata && (<PetCardMetadata pet={petMetadata}/>)}
+          </div>
+          <div className='flex flex-col gap-6 w-full 2xl:w-auto'>
+            <PetCardLogs category={LogsCategoryType.HEALTH} logs={petLogs}/>
+            <PetCardLogs  category={LogsCategoryType.GROWTH} logs={petLogs}/>
+          </div>
+        <div className='flex flex-col w-full 2xl:w-auto'>
           <PetCardCalendar events={petEvents}/>
         </div>
       </div>

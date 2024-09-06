@@ -22,16 +22,16 @@ const Sidenav = ({isOpen, onClose}) => {
 
     return (
       <aside className='
-      sm:sticky sm:top-0 sm:h-screen sm:block sm:min-w-[250px] justify-center'>
+      sm:sticky sm:top-0 sm:h-screen sm:block sm:min-w-[250px]  justify-center'>
         <div className={`${sideNavClass} sm:hidden`}>
           <div onClick={onClose} className="fixed inset-0 bg-black opacity-50 z-40"></div>
         </div>
         <div className={`${sideNavClass} sm:block`}>
-          <div className="fixed inset-0 flex flex-col h-full bg-white w-52 z-50">
+          <div className="fixed inset-0 flex flex-col h-full bg-white w-72 sm:w-52 z-50">
             <div className="text-typography-primary font-bold text-2xl pl-10 py-6 border-b border-background-primary mb-8">
                 PETOPIA
             </div>
-            <div className="flex flex-col gap-6 pl-10 text-typography-secondary font-light text-sm">
+            <div className="flex flex-col gap-6 pl-10 text-typography-secondary font-light text-lg sm:text-sm">
               {
                 links.filter((link)=>link.sidenav).map((link,index)=> (
                     <NavLink

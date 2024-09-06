@@ -26,8 +26,8 @@ import { useState } from 'react';
       })
   
     return (
-      <div className='w-full flex flex-col gap-4'>
-        <table className="table-fixed w-full ">
+      <div className='w-full flex flex-col gap-4 h-full'>
+        <table className="table-fixed w-full h-full ">
           <thead className="border-b text-left text-xs text-typography-secondary">
             {table.getHeaderGroups().map(headerGroup => (
               <tr key={headerGroup.id}>
@@ -44,7 +44,7 @@ import { useState } from 'react';
               </tr>
             ))}
           </thead>
-          <tbody className="text-xs" >
+          <tbody className="text-xs flex-grow" >
             {table.getRowModel().rows.length > 0 ? (
                 table.getRowModel().rows.map(row => {
                     return (

@@ -21,7 +21,7 @@ function App() {
   }, [dispatch]);
 
   return (
-      <div className='text-typography-primary'>
+      <div className='text-typography-primary overflow-x-hidden max-w-screen'>
          <Routes>
             <Route path="/" element={<CommonRoute />}>
                 <Route element={<PublicRoute />}>
