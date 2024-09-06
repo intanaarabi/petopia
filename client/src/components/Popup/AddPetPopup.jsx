@@ -45,7 +45,7 @@ const AddPetPopup = ({isOpen, onClose}) => {
             <p className="header">Add New Pet</p>
                 <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-4">
-                    <div className="flex flex-row gap-6">
+                    <div className="flex flex-wrap sm:flex-row gap-6">
                         <div className="flex flex-col flex-grow gap-4">
                             <div className="flex flex-col gap-1">
                                 <label 
@@ -125,10 +125,12 @@ const AddPetPopup = ({isOpen, onClose}) => {
                                 </div>
                             </div>
                         </div>
-                        <button type="button" className="bg-button-primary w-1/3 rounded-xl relative group hover:opacity-80 transition-all duration-300">
-                            <div className="absolute rounded-full bg-white w-[100px] h-[100px] left-1/2 top-1/3 transform -translate-x-1/2 -translate-y-1/3">
-                                <div className="relative flex items-center justify-center h-full">
-                                    <BiSolidImageAdd className="text-4xl"/>
+                        <button type="button" className="bg-button-primary h-[150px] sm:h-auto w-full sm:w-1/3 rounded-xl relative group hover:opacity-80 transition-all duration-300">
+                            <div className="">
+                                <div className="absolute rounded-full bg-white w-[100px] h-[100px] left-1/2 top-1/3 transform -translate-x-1/2 -translate-y-1/3">
+                                    <div className="relative flex items-center justify-center h-full">
+                                        <BiSolidImageAdd className="text-4xl"/>
+                                    </div>
                                 </div>
                             </div>
                             <p className="absolute left-1/2 top-2/3 text-xs font-bold transform -translate-x-1/2 translate-y-2/3 mt-3">Upload Image</p>
