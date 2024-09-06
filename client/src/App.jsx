@@ -21,9 +21,8 @@ function App() {
   }, [dispatch]);
 
   return (
-      <div className='bg-background-primary text-typography-primary min-h-screen'>
-          <AnimatePresence>
-            <Routes>
+      <div className='text-typography-primary'>
+         <Routes>
             <Route path="/" element={<CommonRoute />}>
                 <Route element={<PublicRoute />}>
                   <Route path="/login" element={<Login />} />
@@ -36,8 +35,7 @@ function App() {
                   ))}
                 </Route>
               </Route>
-            </Routes>
-         </AnimatePresence>        
+            </Routes>   
       </div>
   )
 }

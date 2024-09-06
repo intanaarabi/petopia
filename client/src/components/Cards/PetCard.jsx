@@ -47,11 +47,11 @@ const PetCard = ({pet, mini = false}) => {
                 </div>
         )}
         { mini && (
-            <div className="card p-4 flex flex-row gap-6 min-w-[300px]">
-                <div className={`${getColorByIndex(pet.index)} min-w-[80px] min-h-[80px] rounded-2xl`}>
+            <div className="card w-full md:w-auto gap-4 p-4 flex md:flex-row md:min-w-[300px] md:h-auto">
+                <div className={`${getColorByIndex(pet.index)} w-20 h-20  rounded-2xl`}>
                 </div>
-                <div className="flex flex-col w-full">
-                    <div className="flex flex-row items-center gap-2">
+                <div className="flex flex-col flex-1">
+                    <div className="flex flex-row items-center gap-2 ">
                         <p className="font-bold text-lg">{name}</p>
                         <div>{getSexIcon(sex)}</div>
                         <div className="flex-grow"></div>
@@ -60,8 +60,9 @@ const PetCard = ({pet, mini = false}) => {
                         </button>
                     </div>
                     <p className="text-xs text-typography-secondary">{breed}</p>
-                    <div className="flex-grow"></div>
-                    <p className="text-[11px] text-typography-secondary">{calculateAge(dob)}</p>
+                        <div className="flex-grow"></div>
+                        <p className="text-[11px] text-typography-secondary">{calculateAge(dob)}</p>
+                  
                 </div>
             </div>
         )}

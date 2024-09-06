@@ -27,19 +27,19 @@ const Dashboard = () => {
 
     return (<>
         <div className="flex flex-col gap-6">
-            <div className="flex flex-row gap-8">
+            <div className="flex flex-wrap md:flex-row gap-8">
                 {
                     pets.map((pet,index)=>(
                         <PetCard key={index} mini={true} pet={pet} index={index}/>
                     ))
                 }
             </div>
-            <div className="flex flex-row gap-6">
+            <div className="flex flex-col xl:flex-row gap-6">
                 <div className="flex flex-col flex-grow gap-6">
                     <PetCardGraph data={weightData}/>
                     <PetCardRecentActivity logs={logs}/>
                 </div>
-                <div className="flex-grow">
+                <div className="flex-1">
                      <PetCardCalendar events={events} allowAdd={false}/>
                 </div>
             </div>

@@ -18,20 +18,23 @@ const Register = () => {
     };
   
     return(
-      <div className="h-full flex flex-row">
+      <div className="flex flex-col min-h-screen sm:flex-row">
         <motion.div 
            initial={{ x: '-100vw' }}
            animate={{ x: 0 }}
            transition={{ type: "spring", bounce: 0.25 }}
-            className='z-10 w-[45%] flex flex-row gap-4 items-center justify-center'>
+            className='  flex flex-row gap-4 items-center justify-center z-10 
+                  flex-initial
+                  p-12
+                  sm:w-[45%] sm:min-h-screen '>
           <img src='./logo-white.svg' className='w-20 mt-2'></img>
-          <p className='text-[72px] text-white font-bold tracking-wide'>petopia</p>
+          <p className='text-5xl lg:text-7xl text-white font-bold tracking-wide'>petopia</p>
         </motion.div>
         <motion.div
             initial={{ x: '-45vw' }}
             animate={{ x: 0 }}
             transition={{ type: "spring", bounce: 0.25 }}
-          className='z-10 bg-background-primary flex-grow min-h-screen justify-center items-center flex flex-col'>
+          className='flex flex-col flex-1 z-10 bg-background-primary justify-center items-center '>
           <motion.div
               initial={{ x: '100vw' }}
               animate={{ x: 0 }}

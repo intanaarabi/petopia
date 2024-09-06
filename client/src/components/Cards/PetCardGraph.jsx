@@ -60,7 +60,7 @@ const CustomizedXAxisTick = ({x, y, payload}) => {
 
 const CustomLegend = ({ payload }) => {
   return (
-    <div className="flex flex-col gap-2 ml-16 justify-start ">
+    <div className="hidden sm:block flex flex-col gap-2 ml-16 justify-start ">
       {payload.map((entry, index) => (
         <div key={index} className="flex flex-row gap-4 items-center">
           <div style={{backgroundColor: entry.color}} className="rounded-full w-[10px] h-[10px]"></div>

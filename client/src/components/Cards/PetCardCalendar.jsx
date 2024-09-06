@@ -72,14 +72,14 @@ const PetCardCalendar = ({events, allowAdd = true}) => {
     return (
         <>
            <div className='flex gap-4 flex-col'>
-            <div className='card p-6'>
-            <Calendar
-                    onClickDay={(val) => setSelectedDate(val)}
-                    tileContent={({ date, view }) =>
-                        view === 'month' && isDateMarked(date) ? (
-                            <PetEventMarker />
-                        ) : null
-                    }
+            <div className='flex justify-center card p-6'>
+                <Calendar
+                        onClickDay={(val) => setSelectedDate(val)}
+                        tileContent={({ date, view }) =>
+                            view === 'month' && isDateMarked(date) ? (
+                                <PetEventMarker />
+                            ) : null
+                        }
                 />
             </div>
             <div className='card p-6 flex flex-col gap-4 '>
